@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Experience the divine epic of Ramayana through an immersive, interactive storytelling journey with beautiful visuals and narration." />
+  <title>Ramayana — The Divine Epic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="ramayana.css" />
+</head>
+
+<body>
+
+
+  <!-- ═══ GOLDEN ARROW CURSOR ═══ -->
+  <div id="cursor"><svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="shaftG" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#6b3e08" />
+          <stop offset="45%" stop-color="#c47a1e" />
+          <stop offset="100%" stop-color="#f5b942" />
+        </linearGradient>
+        <linearGradient id="tipG" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fffde0" />
+          <stop offset="100%" stop-color="#f5b942" />
+        </linearGradient>
+        <filter id="af">
+          <feGaussianBlur stdDeviation="2" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <g filter="url(#af)" transform="rotate(-45 26 26)">
+        <rect x="5" y="23.5" width="34" height="4" rx="2" fill="url(#shaftG)" />
+        <path d="M39,16 L52,26 L39,36 L41,26Z" fill="url(#tipG)" />
+        <path d="M5,26 L12,19 L14,26 L12,33Z" fill="#c47a1e" opacity=".85" />
+        <path d="M5,26 L9,20 L10,26 L9,32Z" fill="#f5b942" opacity=".6" />
+        <rect x="4" y="22" width="4" height="8" rx="2" fill="#5a2e04" />
+        <rect x="15" y="22.5" width="2.5" height="7" rx="1" fill="#c47a1e" opacity=".5" />
+        <rect x="22" y="22.5" width="2.5" height="7" rx="1" fill="#c47a1e" opacity=".35" />
+      </g>
+    </svg></div>
+  <div id="cursor-glow"></div>
+  <div id="bow-overlay" style="position:fixed;inset:0;pointer-events:none;z-index:9994;overflow:hidden;"></div>
+
+  <!-- ═══ NARRATION OVERLAY ═══ -->
+  <div id="narration-overlay" role="dialog" aria-modal="true" aria-label="Choose narration language">
+    <div class="narr-box">
+      <div class="narr-om">ॐ</div>
+      <h2 class="narr-title">Choose Your Experience</h2>
+      <p class="narr-subtitle">Select how you wish to hear the story of Ramayana</p>
+      <div class="narr-toggle-wrap">
+        <div class="narr-toggle" id="narr-toggle">
+          <div class="narr-slider" id="narr-slider"></div>
+          <button class="narr-btn narr-btn-hi active" id="btn-hi" data-lang="hi" aria-pressed="false">
+            <span class="narr-btn-icon">🎙️</span>
+            <span class="narr-btn-label">हिंदी</span>
+            <span class="narr-btn-sub">Hindi Narration</span>
+          </button>
+          <button class="narr-btn narr-btn-mute" id="btn-mute" data-lang="none" aria-pressed="false">
+            <span class="narr-btn-icon">🔇</span>
+            <span class="narr-btn-label">No Audio</span>
+            <span class="narr-btn-sub">Silent Mode</span>
+          </button>
+          <button class="narr-btn narr-btn-en" id="btn-en" data-lang="en" aria-pressed="false">
+            <span class="narr-btn-icon">🎙️</span>
+            <span class="narr-btn-label">English</span>
+            <span class="narr-btn-sub">English Narration</span>
+          </button>
+        </div>
+      </div>
+      <button class="narr-begin-btn" id="narr-begin">
+        <span>Begin the Journey</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10h12M10 4l6 6-6 6" stroke="#030108" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+      <p class="narr-note">You can change this anytime using the controls at the bottom of the screen</p>
+    </div>
+  </div>
+
+  <!-- ═══ NARRATION PERSISTENT PILL ═══ -->
+  <div id="narr-pill" aria-label="Narration controls">
+    <button class="pill-btn" id="pill-btn-hi" data-lang="hi" title="Hindi Narration">🎙️ हिंदी</button>
+    <button class="pill-btn pill-mute" id="pill-btn-mute" data-lang="none" title="No Audio">🔇</button>
+    <button class="pill-btn" id="pill-btn-en" data-lang="en" title="English Narration">🎙️ EN</button>
+  </div>
+
+  <!-- ═══ NARRATION SUBTITLE BAR ═══ -->
+  <div id="narr-subtitle-bar" aria-live="polite">
+    <div id="narr-subtitle-text"></div>
+  </div>
+
+
+  <!-- ═══ PROGRESS BAR ═══ -->
+  <div id="progress-bar"></div>
+
+  <!-- ═══ CHAPTER NAV ═══ -->
+  <nav id="chapter-nav" aria-label="Chapter navigation">
+    <div class="nav-brand">
+      <span class="nav-devanagari">रामायण</span>
+      <span class="nav-subtitle">The Divine Epic</span>
+    </div>
+    <div id="nav-chapter-label" class="nav-chapter-label">Prologue</div>
+    <div class="nav-dots" aria-hidden="true">
+      <span class="dot" data-scene="0"></span>
+      <span class="dot" data-scene="1"></span>
+      <span class="dot" data-scene="2"></span>
+      <span class="dot" data-scene="3"></span>
+      <span class="dot" data-scene="4"></span>
+      <span class="dot" data-scene="5"></span>
+      <span class="dot" data-scene="6"></span>
+      <span class="dot" data-scene="7"></span>
+      <span class="dot" data-scene="8"></span>
+      <span class="dot" data-scene="9"></span>
+      <span class="dot" data-scene="10"></span>
+      <span class="dot" data-scene="11"></span>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════
+       SCENE 0 — PROLOGUE
+  ══════════════════════════════════════ -->
+  <section id="scene-0" class="scene scene-prologue" data-chapter="Prologue" aria-label="Prologue">
+    <canvas id="starCanvas" class="canvas-bg"></canvas>
+    <div class="scene-particles" id="prologue-particles"></div>
+    <div class="prologue-center">
+      <p class="prologue-shloka" id="prologue-shloka">
+        तमसो मा ज्योतिर्गमय
+      </p>
+      <p class="prologue-shloka-trans" id="prologue-trans">Lead me from darkness to light</p>
+      <div class="prologue-divider" id="prologue-divider"></div>
+      <h1 class="main-title" id="main-title">
+        <span class="title-line-1">RAMAYANA</span>
+        <span class="title-line-2">The Eternal Epic</span>
+      </h1>
+      <p class="prologue-by" id="prologue-by">As composed by the sage Valmiki</p>
+      <div class="scroll-cta" id="scroll-cta">
+        <span>Begin the Journey</span>
+        <div class="scroll-arrow-wrap">
+          <div class="scroll-arrow"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Animated celestial bodies -->
+    <div class="celestial" id="moon"></div>
+    <div class="celestial-ring" id="moon-ring"></div>
+    <div class="om-symbol" id="om-symbol" aria-hidden="true">ॐ</div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 1 — AYODHYA
+  ══════════════════════════════════════ -->
+  <section id="scene-1" class="scene scene-ayodhya" data-chapter="The Kingdom of Ayodhya" aria-labelledby="s1-title">
+    <!-- Layered parallax background -->
+    <div class="parallax-layer layer-sky" id="s1-sky"></div>
+    <div class="parallax-layer layer-sun" id="s1-sun">
+      <div class="sun-orb"></div>
+      <div class="sun-rays" id="sun-rays"></div>
+    </div>
+    <div class="parallax-layer layer-mountains" id="s1-mountains">
+      <svg class="mountain-svg" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax meet">
+        <polygon points="0,400 200,100 400,400" fill="#2d1b0e" opacity="0.5" />
+        <polygon points="150,400 380,60 620,400" fill="#3d2310" opacity="0.6" />
+        <polygon points="500,400 720,80 950,400" fill="#2a1608" opacity="0.55" />
+        <polygon points="750,400 1000,50 1250,400" fill="#3d2310" opacity="0.6" />
+        <polygon points="1050,400 1280,90 1440,250 1440,400" fill="#2d1b0e" opacity="0.5" />
+      </svg>
+    </div>
+    <div class="parallax-layer layer-palace" id="s1-palace">
+      <svg class="palace-svg" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax meet">
+        <!-- Palace spires -->
+        <g fill="#1a0d05">
+          <rect x="580" y="80" width="8" height="300" />
+          <polygon points="580,80 584,20 588,80" />
+          <rect x="680" y="50" width="12" height="330" />
+          <polygon points="680,50 686,0 692,50" />
+          <rect x="760" y="70" width="8" height="310" />
+          <polygon points="760,70 764,15 768,70" />
+          <rect x="840" y="60" width="10" height="320" />
+          <polygon points="840,60 845,5 850,60" />
+          <rect x="500" y="120" width="6" height="260" />
+          <polygon points="500,120 503,70 506,120" />
+        </g>
+        <!-- Palace walls -->
+        <rect x="450" y="200" width="540" height="180" fill="#1a0d05" opacity="0.9" />
+        <rect x="500" y="180" width="440" height="40" fill="#251508" opacity="0.9" />
+        <!-- Arched windows glow -->
+        <ellipse cx="560" cy="260" rx="18" ry="25" fill="#f5b94240" />
+        <ellipse cx="640" cy="260" rx="18" ry="25" fill="#f5b94240" />
+        <ellipse cx="720" cy="260" rx="18" ry="25" fill="#f5b94240" />
+        <ellipse cx="800" cy="260" rx="18" ry="25" fill="#f5b94240" />
+        <ellipse cx="880" cy="260" rx="18" ry="25" fill="#f5b94240" />
+        <!-- Ground -->
+        <rect x="0" y="370" width="1440" height="130" fill="#0f0705" />
+      </svg>
+      <div class="palace-glow" id="palace-glow"></div>
+    </div>
+    <div class="parallax-layer layer-foreground" id="s1-fg">
+      <svg viewBox="0 0 1440 200" class="fg-svg" preserveAspectRatio="xMidYMax meet">
+        <rect x="0" y="100" width="1440" height="100" fill="#080402" />
+        <path d="M0,100 Q180,60 360,90 Q540,120 720,80 Q900,40 1080,90 Q1260,140 1440,100 L1440,200 L0,200Z"
+          fill="#0c0604" />
+      </svg>
+    </div>
+    <div class="scene-content scene-content-right" id="s1-content">
+      <div class="scene-number">I</div>
+      <h2 class="scene-title" id="s1-title">The Kingdom<br>of Ayodhya</h2>
+      <div class="scene-divider"></div>
+      <p class="scene-body">In the fertile valley of the river Sarayu stood the magnificent city of Ayodhya — "the
+        unconquerable." Ruled by the noble King Dasharatha of the Solar dynasty, it was a kingdom where righteousness
+        flowed like the sacred river itself.</p>
+      <p class="scene-body">Four princes blessed the royal household: the virtuous <em>Rama</em>, the courageous
+        <em>Lakshmana</em>, the devoted <em>Bharata</em>, and the valiant <em>Shatrughna</em>. Of all, Rama shone like
+        the sun — gentle as the moon, fierce as fire, deep as the ocean.</p>
+      <div class="scene-characters">
+        <span class="char-tag">King Dasharatha</span>
+        <span class="char-tag">Prince Rama</span>
+        <span class="char-tag">Lakshmana</span>
+        <span class="char-tag">Bharata</span>
+      </div>
+    </div>
+    <div class="golden-particles" id="s1-particles"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 2 — SWAYAMVARA
+  ══════════════════════════════════════ -->
+  <section id="scene-2" class="scene scene-swayamvara" data-chapter="The Swayamvara of Sita" aria-labelledby="s2-title">
+    <div class="parallax-layer layer-sky s2-sky"></div>
+    <div class="s2-hall">
+      <svg class="hall-svg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax meet">
+        <!-- Hall columns -->
+        <g fill="#1a0d05" opacity="0.85">
+          <rect x="80" y="50" width="30" height="550" />
+          <rect x="200" y="50" width="30" height="550" />
+          <rect x="320" y="50" width="30" height="550" />
+          <rect x="1110" y="50" width="30" height="550" />
+          <rect x="1230" y="50" width="30" height="550" />
+          <rect x="1350" y="50" width="30" height="550" />
+          <!-- Column caps -->
+          <rect x="60" y="45" width="70" height="20" rx="4" />
+          <rect x="180" y="45" width="70" height="20" rx="4" />
+          <rect x="300" y="45" width="70" height="20" rx="4" />
+          <rect x="1090" y="45" width="70" height="20" rx="4" />
+          <rect x="1210" y="45" width="70" height="20" rx="4" />
+          <rect x="1330" y="45" width="70" height="20" rx="4" />
+        </g>
+        <!-- Bow pedestal -->
+        <rect x="620" y="300" width="200" height="20" rx="5" fill="#3d2310" />
+        <rect x="660" y="260" width="120" height="40" rx="6" fill="#2a1608" />
+        <!-- The Bow of Shiva -->
+        <g id="shiva-bow" transform="translate(720,200)">
+          <path d="M-60,60 Q0,-40 60,60" stroke="#d4af37" stroke-width="8" fill="none" stroke-linecap="round" />
+          <line x1="-60" y1="60" x2="60" y2="60" stroke="#c8960c" stroke-width="3" stroke-dasharray="4,3" />
+        </g>
+        <!-- Bow glow -->
+        <ellipse cx="720" cy="270" rx="80" ry="40" fill="#f5b94220" id="bow-glow-svg" />
+        <!-- Floor -->
+        <rect x="0" y="500" width="1440" height="100" fill="#0f0705" />
+        <!-- Flower petals decorative -->
+        <circle cx="400" cy="480" r="5" fill="#ff6b8a" opacity="0.6" />
+        <circle cx="500" cy="470" r="4" fill="#ffb3c6" opacity="0.5" />
+        <circle cx="700" cy="490" r="6" fill="#ff6b8a" opacity="0.6" />
+        <circle cx="900" cy="475" r="4" fill="#ffb3c6" opacity="0.5" />
+        <circle cx="1100" cy="485" r="5" fill="#ff6b8a" opacity="0.6" />
+      </svg>
+    </div>
+    <div class="bow-glow-effect" id="bow-glow"></div>
+    <div class="scene-content scene-content-left" id="s2-content">
+      <div class="scene-number">II</div>
+      <h2 class="scene-title" id="s2-title">The Swayamvara<br>of Sita</h2>
+      <div class="scene-divider"></div>
+      <p class="scene-body">In the kingdom of Mithila, King Janaka's daughter Sita — born of the sacred earth itself —
+        came of age for marriage. Janaka declared: only he who could lift and string the mighty bow of Lord Shiva would
+        win Sita's hand.</p>
+      <p class="scene-body">A hundred kings tried and failed. Then Rama, with effortless grace, lifted the bow, strung
+        it, and broke it — the thunderous crack echoing across the three worlds. Sita placed the garland around Rama's
+        neck, and heaven itself rejoiced.</p>
+      <div class="scene-characters">
+        <span class="char-tag gold">Sita — Daughter of Earth</span>
+        <span class="char-tag">King Janaka</span>
+        <span class="char-tag gold">Rama — The Chosen</span>
+      </div>
+    </div>
+    <div class="petal-container" id="petals"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 3 — EXILE
+  ══════════════════════════════════════ -->
+  <section id="scene-3" class="scene scene-exile" data-chapter="Rama's Exile" aria-labelledby="s3-title">
+    <div class="exile-sky" id="exile-sky"></div>
+    <div class="exile-palace-fade" id="exile-palace"></div>
+    <div class="forest-emerge" id="forest-emerge">
+      <svg viewBox="0 0 1440 500" class="forest-svg" preserveAspectRatio="xMidYMax meet">
+        <!-- Dense trees -->
+        <g fill="#0a1f0a">
+          <polygon points="100,500 160,200 220,500" />
+          <polygon points="180,500 250,150 320,500" />
+          <polygon points="50,500 100,250 160,500" />
+          <polygon points="300,500 370,180 450,500" />
+          <polygon points="400,500 470,220 550,500" />
+          <polygon points="520,500 600,170 680,500" />
+          <polygon points="650,500 720,190 800,500" />
+          <polygon points="780,500 850,160 930,500" />
+          <polygon points="900,500 970,180 1050,500" />
+          <polygon points="1030,500 1100,200 1180,500" />
+          <polygon points="1150,500 1220,170 1300,500" />
+          <polygon points="1280,500 1350,200 1440,400 1440,500" />
+        </g>
+        <!-- Lighter layer -->
+        <g fill="#0d280d" opacity="0.7">
+          <polygon points="0,500 60,280 130,500" />
+          <polygon points="230,500 290,230 360,500" />
+          <polygon points="460,500 520,260 590,500" />
+          <polygon points="700,500 760,240 830,500" />
+          <polygon points="930,500 990,270 1060,500" />
+          <polygon points="1160,500 1220,250 1290,500" />
+        </g>
+        <!-- Road path -->
+        <path d="M620,500 Q680,300 720,100" stroke="#2a1a08" stroke-width="40" fill="none" opacity="0.4" />
+        <path d="M620,500 Q680,300 720,100" stroke="#3d2710" stroke-width="20" fill="none" opacity="0.3" />
+      </svg>
+    </div>
+    <div class="exile-road" id="exile-road">
+      <div class="road-figures">
+        <svg viewBox="0 0 400 200" class="figures-svg">
+          <!-- Simplified figures walking -->
+          <g fill="#1a0d05" opacity="0.8" id="exile-figures">
+            <!-- Rama -->
+            <circle cx="160" cy="80" r="12" />
+            <rect x="154" y="92" width="12" height="40" />
+            <line x1="154" y1="100" x2="135" y2="120" stroke="#1a0d05" stroke-width="4" />
+            <line x1="166" y1="100" x2="182" y2="125" stroke="#1a0d05" stroke-width="4" />
+            <!-- Sita -->
+            <circle cx="200" cy="84" r="10" />
+            <rect x="194" y="94" width="10" height="35" />
+            <!-- Lakshmana -->
+            <circle cx="238" cy="80" r="12" />
+            <rect x="232" y="92" width="12" height="40" />
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="scene-content scene-content-center" id="s3-content">
+      <div class="scene-number">III</div>
+      <h2 class="scene-title" id="s3-title">The Exile</h2>
+      <div class="scene-divider"></div>
+      <p class="scene-body">Queen Kaikeyi, consumed by jealousy, called upon two ancient boons granted by Dasharatha.
+        Her demands were cruel: exile Rama to the forest for fourteen years, and crown her son Bharata as king.
+        Dasharatha, bound by his word, wept but could not refuse.</p>
+      <p class="scene-body">Without a word of resentment, Rama accepted his fate. Sita and Lakshmana refused to be
+        parted from him. Together they walked into the wilderness — the king's grief was so great, he died of a broken
+        heart soon after.</p>
+      <div class="scene-characters">
+        <span class="char-tag red">Kaikeyi — The Scheming Queen</span>
+        <span class="char-tag">Rama · Sita · Lakshmana</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 4 — FOREST LIFE
+  ══════════════════════════════════════ -->
+  <section id="scene-4" class="scene scene-forest" data-chapter="Life in the Forest" aria-labelledby="s4-title">
+    <div class="forest-bg" id="forest-bg">
+      <div class="fog-layer fog-1" id="fog1"></div>
+      <div class="fog-layer fog-2" id="fog2"></div>
+      <div class="forest-deep">
+        <svg viewBox="0 0 1440 600" class="forest-deep-svg" preserveAspectRatio="xMidYMax meet">
+          <defs>
+            <radialGradient id="forestLight" cx="50%" cy="30%" r="50%">
+              <stop offset="0%" stop-color="#2d5a1e" stop-opacity="0.4" />
+              <stop offset="100%" stop-color="#030f03" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="1440" height="600" fill="#020c02" />
+          <rect width="1440" height="600" fill="url(#forestLight)" />
+          <!-- Deep trees -->
+          <g opacity="0.9">
+            <g fill="#041004">
+              <polygon points="0,600 80,100 160,600" />
+              <polygon points="100,600 190,80 280,600" />
+              <polygon points="250,600 340,120 430,600" />
+              <polygon points="400,600 490,90 580,600" />
+              <polygon points="550,600 640,100 730,600" />
+              <polygon points="700,600 790,80 880,600" />
+              <polygon points="850,600 940,110 1030,600" />
+              <polygon points="1000,600 1090,90 1180,600" />
+              <polygon points="1150,600 1240,100 1330,600" />
+              <polygon points="1290,600 1370,120 1440,500 1440,600" />
+            </g>
+            <g fill="#061506" opacity="0.7">
+              <polygon points="50,600 120,180 190,600" />
+              <polygon points="200,600 270,160 340,600" />
+              <polygon points="370,600 440,150 510,600" />
+              <polygon points="540,600 610,170 680,600" />
+              <polygon points="720,600 790,160 860,600" />
+              <polygon points="890,600 960,150 1030,600" />
+              <polygon points="1060,600 1130,170 1200,600" />
+              <polygon points="1230,600 1300,180 1370,600" />
+            </g>
+          </g>
+          <!-- Ground -->
+          <rect x="0" y="540" width="1440" height="60" fill="#020a02" />
+          <!-- Light beams -->
+          <polygon points="580,0 560,300 640,300 620,0" fill="#4a8f2010" opacity="0.3" />
+          <polygon points="780,0 760,300 840,300 820,0" fill="#4a8f2010" opacity="0.3" />
+        </svg>
+      </div>
+    </div>
+    <div class="fireflies" id="fireflies"></div>
+    <div class="birds-container" id="birds"></div>
+    <div class="scene-content scene-content-right" id="s4-content">
+      <div class="scene-number">IV</div>
+      <h2 class="scene-title" id="s4-title">Life in the<br>Forest</h2>
+      <div class="scene-divider"></div>
+      <p class="scene-body">In the Dandaka forest, amid towering trees and sacred rivers, Rama, Sita, and Lakshmana
+        found a strange peace. They met sages engaged in deep meditation, learned from their wisdom, and protected them
+        from marauding demons.</p>
+      <p class="scene-body">They built a hermitage at Panchavati by the Godavari river. But peace in exile is fragile —
+        dark forces stirred in the shadows. The demoness Shurpanakha, sister of Ravana, encountered them and was
+        humiliated by Lakshmana. The seeds of catastrophe were sown.</p>
+      <div class="scene-characters">
+        <span class="char-tag">Sages of the Forest</span>
+        <span class="char-tag red">Shurpanakha</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 5 — THE GOLDEN DEER
+  ══════════════════════════════════════ -->
+  <section id="scene-5" class="scene scene-deer" data-chapter="The Golden Deer" aria-labelledby="s5-title">
+    <div class="deer-forest-bg"></div>
+    <div class="deer-scene-canvas">
+      <canvas id="deerCanvas" class="deer-canvas"></canvas>
+    </div>
+    <div class="deer-glow-ambient" id="deer-ambient"></div>
+    <div class="scene-content scene-content-left" id="s5-content">
+      <div class="scene-number">V</div>
+      <h2 class="scene-title" id="s5-title">The Golden<br>Deer</h2>
+      <div class="scene-divider"></div>
+      <p class="scene-body">Ravana enlisted the demon sorcerer Maricha to take the form of a magical golden deer — a
+        creature of impossible beauty, its hide shimmering like molten starlight. It appeared before their hermitage,
+        and Sita, enchanted, asked Rama to capture it.</p>
+      <p class="scene-body">Lakshmana warned it was a demon's trick, but Sita's heart was set. Rama pursued the deer
+        deep into the forest. Mortally wounded, Maricha cried out in Rama's voice: <em>"O Lakshmana! O Sita!"</em> The
+        trap was set. The forest grew dark.</p>
+      <div class="scene-characters">
+        <span class="char-tag gold">Maricha — The Golden Illusion</span>
+        <span class="char-tag red">Ravana's Design</span>
+      </div>
+    </div>
+    <div class="sparkle-container" id="deer-sparkles"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 6 — ABDUCTION OF SITA
+  ══════════════════════════════════════ -->
+  <section id="scene-6" class="scene scene-abduction" data-chapter="The Abduction of Sita" aria-labelledby="s6-title">
+    <div class="storm-sky" id="storm-sky"></div>
+    <canvas id="lightningCanvas" class="lightning-canvas"></canvas>
+    <div class="dark-clouds" id="dark-clouds">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+    </div>
+    <div class="ravana-chariot" id="ravana-chariot">
+      <svg viewBox="0 0 300 200" class="chariot-svg">
+        <defs>
+          <radialGradient id="ravanaGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#8b0000" stop-opacity="0.8" />
+            <stop offset="100%" stop-color="#8b0000" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <!-- Chariot glow aura -->
+        <ellipse cx="150" cy="120" rx="130" ry="80" fill="url(#ravanaGlow)" opacity="0.6" />
+        <!-- Chariot body -->
+        <path d="M50,140 Q150,80 250,140 L240,180 Q150,160 60,180Z" fill="#3d0000" />
+        <path d="M60,140 Q150,90 240,140" stroke="#8b0000" stroke-width="3" fill="none" />
+        <!-- Wheels -->
+        <circle cx="80" cy="175" r="25" fill="none" stroke="#5a0000" stroke-width="4" />
+        <circle cx="220" cy="175" r="25" fill="none" stroke="#5a0000" stroke-width="4" />
+        <!-- Spokes -->
+        <line x1="80" y1="150" x2="80" y2="200" stroke="#8b0000" stroke-width="2" />
+        <line x1="55" y1="175" x2="105" y2="175" stroke="#8b0000" stroke-width="2" />
+        <line x1="62" y1="157" x2="98" y2="193" stroke="#8b0000" stroke-width="2" />
+        <line x1="62" y1="193" x2="98" y2="157" stroke="#8b0000" stroke-width="2" />
+        <line x1="220" y1="150" x2="220" y2="200" stroke="#8b0000" stroke-width="2" />
+        <line x1="195" y1="175" x2="245" y2="175" stroke="#8b0000" stroke-width="2" />
+        <!-- Ravana silhouette -->
+        <g fill="#1a0000">
+          <!-- Multiple heads suggestion -->
+          <circle cx="135" cy="60" r="12" />
+          <circle cx="155" cy="55" r="10" />
+          <circle cx="175" cy="60" r="11" />
+          <!-- Body -->
+          <rect x="130" y="72" width="50" height="60" rx="5" />
+          <!-- Ten arms suggestion -->
+          <line x1="130" y1="85" x2="90" y2="70" stroke="#1a0000" stroke-width="4" />
+          <line x1="130" y1="95" x2="88" y2="90" stroke="#1a0000" stroke-width="4" />
+          <line x1="180" y1="85" x2="220" y2="70" stroke="#1a0000" stroke-width="4" />
+          <line x1="180" y1="95" x2="222" y2="90" stroke="#1a0000" stroke-width="4" />
+        </g>
+        <!-- Crown glow -->
+        <polygon points="155,30 160,15 165,30 170,10 175,30 180,18 185,30" fill="#8b0000" opacity="0.9" />
+      </svg>
+    </div>
+    <div class="jatayu-scene" id="jatayu">
+      <svg viewBox="0 0 200 150" class="jatayu-svg">
+        <g fill="#8b4513" opacity="0.8">
+          <!-- Jatayu the great eagle -->
+          <ellipse cx="100" cy="80" rx="30" ry="15" />
+          <polygon points="70,80 20,40 80,75" />
+          <polygon points="130,80 180,40 120,75" />
+          <!-- Beak -->
+          <polygon points="100,72 80,65 85,80" fill="#d4a017" />
+        </g>
+      </svg>
+    </div>
+    <div class="scene-content scene-content-center dark-content" id="s6-content">
+      <div class="scene-number red-number">VI</div>
+      <h2 class="scene-title red-title" id="s6-title">The Abduction<br>of Sita</h2>
+      <div class="scene-divider red-divider"></div>
+      <p class="scene-body">With both brothers away, Ravana approached in the guise of a sage. The great ten-headed
+        demon king of Lanka cast off his disguise and seized Sita, dragging her into his flying chariot Pushpaka. Sita
+        cried out for Rama across the three worlds.</p>
+      <p class="scene-body">The noble vulture Jatayu, faithful to Dasharatha, attacked Ravana valiantly — but the demon
+        severed his wings. Dying, Jatayu held on only long enough to tell Rama what had happened. The darkest chapter
+        had begun.</p>
+      <div class="scene-characters">
+        <span class="char-tag red-tag">Ravana — The Ten-Headed King</span>
+        <span class="char-tag gold">Jatayu — The Faithful Eagle</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 7 — HANUMAN MEETS RAMA
+  ══════════════════════════════════════ -->
+  <section id="scene-7" class="scene scene-hanuman" data-chapter="Hanuman Meets Rama" aria-labelledby="s7-title">
+    <div class="mountain-bg" id="mountain-bg">
+      <svg viewBox="0 0 1440 600" class="mountain-bg-svg" preserveAspectRatio="xMidYMax meet">
+        <defs>
+          <linearGradient id="mountGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a0d3d" />
+            <stop offset="100%" stop-color="#0d0820" />
+          </linearGradient>
+          <radialGradient id="divineLight" cx="50%" cy="40%" r="40%">
+            <stop offset="0%" stop-color="#f5b942" stop-opacity="0.3" />
+            <stop offset="100%" stop-color="#f5b942" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <rect width="1440" height="600" fill="url(#mountGrad)" />
+        <rect width="1440" height="600" fill="url(#divineLight)" />
+        <!-- Mountains -->
+        <polygon points="0,600 280,150 560,600" fill="#0f0825" opacity="0.9" />
+        <polygon points="200,600 500,80 800,600" fill="#130b30" opacity="0.9" />
+        <polygon points="500,600 780,120 1060,600" fill="#0f0825" opacity="0.9" />
+        <polygon points="800,600 1100,90 1440,400 1440,600" fill="#130b30" opacity="0.9" />
+        <!-- Rishyamukha peak detail -->
+        <polygon points="580,600 780,40 980,600" fill="#0d0620" opacity="0.95" />
+        <!-- Snow peaks -->
+        <polygon points="680,40 780,80 880,40 780,0" fill="#1a0d3d" opacity="0.5" />
+      </svg>
+    </div>
+    <div class="divine-glow-scene" id="divine-glow-7"></div>
+    <div class="hanuman-figure" id="hanuman-fig">
+      <svg viewBox="0 0 200 300" class="hanuman-svg">
+        <defs>
+          <radialGradient id="hanumanAura" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f5b942" stop-opacity="0.4" />
+            <stop offset="100%" stop-color="#f5b942" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <!-- Aura -->
+        <ellipse cx="100" cy="150" rx="90" ry="130" fill="url(#hanumanAura)" />
+        <!-- Hanuman body - orangutan-like divine form -->
+        <g fill="#c47a1e">
+          <!-- Head -->
+          <circle cx="100" cy="70" r="35" />
+          <!-- Face features -->
+          <ellipse cx="88" cy="68" rx="8" ry="10" fill="#8b5a0a" />
+          <ellipse cx="112" cy="68" rx="8" ry="10" fill="#8b5a0a" />
+          <!-- Eyes glow -->
+          <circle cx="88" cy="66" r="4" fill="#f5b942" />
+          <circle cx="112" cy="66" r="4" fill="#f5b942" />
+          <!-- Snout -->
+          <ellipse cx="100" cy="82" rx="12" ry="10" fill="#a0620f" />
+          <!-- Body -->
+          <rect x="70" y="105" width="60" height="90" rx="15" />
+          <!-- Arms -->
+          <rect x="30" y="110" width="40" height="15" rx="7" transform="rotate(20 50 117)" />
+          <rect x="130" y="110" width="40" height="15" rx="7" transform="rotate(-20 150 117)" />
+          <!-- Legs -->
+          <rect x="72" y="190" width="22" height="70" rx="8" />
+          <rect x="106" y="190" width="22" height="70" rx="8" />
+          <!-- Tail curling up -->
+          <path d="M160,200 Q200,150 180,100 Q165,70 180,50" stroke="#c47a1e" stroke-width="12" fill="none"
+            stroke-linecap="round" />
+        </g>
+        <!-- Sacred thread -->
+        <line x1="70" y1="110" x2="130" y2="110" stroke="#f5b942" stroke-width="2" opacity="0.8" />
+        <!-- Hands joined (bowing) -->
+        <g fill="#a0620f">
+          <ellipse cx="55" cy="155" rx="12" ry="8" transform="rotate(30 55 155)" />
+          <ellipse cx="75" cy="165" rx="12" ry="8" transform="rotate(-10 75 165)" />
+        </g>
+      </svg>
+    </div>
+    <div class="scene-content scene-content-right" id="s7-content">
+      <div class="scene-number">VII</div>
+      <h2 class="scene-title divine-title" id="s7-title">Hanuman<br>Meets Rama</h2>
+      <div class="scene-divider divine-divider"></div>
+      <p class="scene-body">On the Rishyamukha mountain, the monkey king Sugriva lived in exile, aided by his general —
+        the mighty Hanuman, son of the Wind God himself. When Rama and Lakshmana arrived, Hanuman recognized the divine
+        light in Rama's eyes.</p>
+      <p class="scene-body">In the instant their eyes met, Hanuman fell to his knees. He had found the Lord he had been
+        born to serve. In that meeting of devotee and deity, a friendship was forged that would shake the cosmos.
+        Sugriva and Rama made a sacred alliance.</p>
+      <div class="scene-characters">
+        <span class="char-tag gold">Hanuman — Son of the Wind</span>
+        <span class="char-tag">Sugriva — Monkey King</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 8 — HANUMAN'S LEAP
+  ══════════════════════════════════════ -->
+  <section id="scene-8" class="scene scene-leap" data-chapter="The Leap to Lanka" aria-labelledby="s8-title">
+    <canvas id="oceanCanvas" class="ocean-canvas"></canvas>
+    <div class="leap-sky" id="leap-sky">
+      <svg viewBox="0 0 1440 600" class="leap-sky-svg" preserveAspectRatio="xMidYMax meet">
+        <defs>
+          <radialGradient id="leapGlow" cx="50%" cy="80%" r="70%">
+            <stop offset="0%" stop-color="#f5b94230" />
+            <stop offset="100%" stop-color="transparent" />
+          </radialGradient>
+        </defs>
+        <rect width="1440" height="600" fill="#040215" />
+        <rect width="1440" height="600" fill="url(#leapGlow)" />
+        <!-- Stars -->
+        <g fill="white" opacity="0.7" id="leap-stars">
+          <circle cx="100" cy="50" r="1.5" />
+          <circle cx="250" cy="30" r="1" />
+          <circle cx="400" cy="70" r="1.5" />
+          <circle cx="600" cy="20" r="1" />
+          <circle cx="750" cy="55" r="2" />
+          <circle cx="900" cy="35" r="1" />
+          <circle cx="1100" cy="60" r="1.5" />
+          <circle cx="1300" cy="25" r="1" />
+          <circle cx="1400" cy="70" r="2" />
+          <circle cx="200" cy="100" r="1" />
+          <circle cx="500" cy="90" r="1.5" />
+          <circle cx="800" cy="80" r="1" />
+          <circle cx="1050" cy="95" r="1.5" />
+          <circle cx="1250" cy="85" r="1" />
+        </g>
+        <!-- Moon -->
+        <circle cx="1200" cy="100" r="50" fill="#faf0d7" opacity="0.9" />
+        <circle cx="1180" cy="90" r="48" fill="#040215" /><!-- moon shadow -->
+        <!-- Lanka on far shore hint -->
+        <polygon points="1350,500 1400,350 1440,480 1440,500" fill="#0d0620" opacity="0.8" />
+        <polygon points="1370,500 1410,320 1440,450 1440,500" fill="#0f0825" opacity="0.7" />
+      </svg>
+    </div>
+    <div class="hanuman-leap" id="hanuman-leap">
+      <svg viewBox="0 0 120 160" class="leap-hanuman-svg">
+        <defs>
+          <radialGradient id="leapAura" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f5b942" stop-opacity="0.6" />
+            <stop offset="100%" stop-color="#f5b942" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <ellipse cx="60" cy="80" rx="55" ry="75" fill="url(#leapAura)" />
+        <!-- Giant leaping Hanuman -->
+        <g fill="#c47a1e">
+          <circle cx="60" cy="30" r="22" />
+          <circle cx="52" cy="27" r="5" fill="#f5b942" />
+          <circle cx="68" cy="27" r="5" fill="#f5b942" />
+          <rect x="40" y="52" width="40" height="60" rx="12" />
+          <!-- Arms stretched forward in leap -->
+          <rect x="0" y="55" width="45" height="12" rx="6" transform="rotate(-30 22 61)" />
+          <rect x="75" y="55" width="45" height="12" rx="6" transform="rotate(30 98 61)" />
+          <!-- Legs extended back -->
+          <rect x="38" y="108" width="18" height="45" rx="8" transform="rotate(20 47 130)" />
+          <rect x="64" y="108" width="18" height="45" rx="8" transform="rotate(-20 73 130)" />
+          <!-- Tail arc -->
+          <path d="M80,110 Q130,80 120,30 Q115,10 130,5" stroke="#c47a1e" stroke-width="10" fill="none"
+            stroke-linecap="round" />
+        </g>
+        <!-- Glow trail -->
+        <ellipse cx="30" cy="80" rx="20" ry="60" fill="#f5b94220" transform="rotate(-45 30 80)" />
+      </svg>
+    </div>
+    <div class="scene-content scene-content-left" id="s8-content">
+      <div class="scene-number">VIII</div>
+      <h2 class="scene-title divine-title" id="s8-title">The Leap<br>to Lanka</h2>
+      <div class="scene-divider divine-divider"></div>
+      <p class="scene-body">The ocean stretched one hundred yojanas to Lanka — an impossible distance. But Hanuman was
+        the son of Vayu, the Wind God. Recalling his divine power, he grew to the size of a mountain, compressed the
+        earth with his feet, and hurled himself across the sky.</p>
+      <p class="scene-body">Sea monsters rose to stop him. Surasa, mother of serpents, opened her mouth wide — Hanuman
+        made himself tiny, entered and exited in an instant. The very ocean trembled in awe. He landed on the shores of
+        Lanka like a thunderbolt from heaven.</p>
+      <div class="scene-characters">
+        <span class="char-tag gold">Hanuman — Mountain-Sized</span>
+        <span class="char-tag">The One Hundred Yojana Leap</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 9 — BURNING OF LANKA
+  ══════════════════════════════════════ -->
+  <section id="scene-9" class="scene scene-fire" data-chapter="The Burning of Lanka" aria-labelledby="s9-title">
+    <canvas id="fireCanvas" class="fire-canvas"></canvas>
+    <div class="ember-container" id="embers"></div>
+    <div class="smoke-layer" id="smoke1"></div>
+    <div class="smoke-layer" id="smoke2"></div>
+    <div class="scene-content scene-content-right fire-content" id="s9-content">
+      <div class="scene-number fire-number">IX</div>
+      <h2 class="scene-title fire-title" id="s9-title">The Burning<br>of Lanka</h2>
+      <div class="scene-divider fire-divider"></div>
+      <p class="scene-body">Hanuman found Sita in the Ashoka grove, a prisoner but unbroken. He delivered Rama's ring
+        and her faith was renewed. But Ravana's forces captured him and sentenced him to death — then changed it to
+        setting his tail on fire.</p>
+      <p class="scene-body">They did not know the tail of the Wind God's son is infinite. Hanuman let them wrap his tail
+        in cloth and set it ablaze. Then he broke free, and using his own burning tail as a torch, leapt from palace to
+        palace, turning Lanka's golden city to cinders. He returned to Rama with news of Sita.</p>
+      <div class="scene-characters">
+        <span class="char-tag fire-tag">Lanka in Flames</span>
+        <span class="char-tag gold">Hanuman — The Invincible</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 10 — THE GREAT BATTLE
+  ══════════════════════════════════════ -->
+  <section id="scene-10" class="scene scene-battle" data-chapter="The Great Battle" aria-labelledby="s10-title">
+    <div class="battle-sky" id="battle-sky"></div>
+    <canvas id="battleCanvas" class="battle-canvas"></canvas>
+    <div class="battle-silhouettes">
+      <svg viewBox="0 0 1440 400" class="battle-svg" preserveAspectRatio="xMidYMax meet">
+        <defs>
+          <radialGradient id="battleGlow" cx="50%" cy="80%" r="60%">
+            <stop offset="0%" stop-color="#8b0000" stop-opacity="0.4" />
+            <stop offset="100%" stop-color="transparent" />
+          </radialGradient>
+        </defs>
+        <rect width="1440" height="400" fill="url(#battleGlow)" />
+        <!-- Army silhouettes -->
+        <g fill="#0a0305" id="battle-silhouette-group">
+          <!-- Monkey army left -->
+          <g opacity="0.85">
+            <circle cx="80" cy="300" r="10" />
+            <rect x="74" y="310" width="12" height="30" />
+            <circle cx="130" cy="295" r="10" />
+            <rect x="124" y="305" width="12" height="30" />
+            <circle cx="180" cy="300" r="10" />
+            <rect x="174" y="310" width="12" height="30" />
+            <circle cx="230" cy="295" r="10" />
+            <rect x="224" y="305" width="12" height="30" />
+            <circle cx="280" cy="300" r="10" />
+            <rect x="274" y="310" width="12" height="30" />
+            <circle cx="330" cy="295" r="10" />
+            <rect x="324" y="305" width="12" height="30" />
+            <!-- Rama at center-left with bow -->
+            <circle cx="450" cy="270" r="15" />
+            <rect x="442" y="285" width="16" height="50" />
+            <line x1="430" y1="260" x2="480" y2="240" stroke="#0a0305" stroke-width="3" />
+            <!-- Lakshmana beside -->
+            <circle cx="490" cy="275" r="13" />
+            <rect x="483" y="288" width="14" height="45" />
+          </g>
+          <!-- Demon army right -->
+          <g fill="#1a0005" opacity="0.85">
+            <circle cx="900" cy="295" r="12" />
+            <rect x="892" y="307" width="16" height="33" />
+            <circle cx="960" cy="300" r="12" />
+            <rect x="952" y="312" width="16" height="33" />
+            <circle cx="1020" cy="295" r="12" />
+            <rect x="1012" y="307" width="16" height="33" />
+            <circle cx="1080" cy="300" r="12" />
+            <rect x="1072" y="312" width="16" height="33" />
+            <circle cx="1140" cy="295" r="12" />
+            <rect x="1132" y="307" width="16" height="33" />
+            <circle cx="1200" cy="300" r="12" />
+            <rect x="1192" y="312" width="16" height="33" />
+            <circle cx="1260" cy="295" r="12" />
+            <rect x="1252" y="307" width="16" height="33" />
+            <circle cx="1320" cy="300" r="12" />
+            <rect x="1312" y="312" width="16" height="33" />
+            <!-- Ravana commanding - large figure -->
+            <g transform="translate(820,230)">
+              <circle cx="0" cy="-15" r="12" />
+              <circle cx="18" cy="-20" r="10" />
+              <circle cx="-18" cy="-20" r="10" />
+              <rect x="-15" y="0" width="30" height="50" rx="5" />
+              <polygon points="-5,-40 0,-60 5,-40 10,-55 15,-40 20,-30 -20,-30 -15,-55" fill="#1a0005" />
+            </g>
+          </g>
+        </g>
+        <!-- Ground -->
+        <rect x="0" y="350" width="1440" height="50" fill="#050208" />
+        <!-- Battle dust -->
+        <ellipse cx="720" cy="360" rx="400" ry="30" fill="#1a0a0a" opacity="0.5" />
+      </svg>
+    </div>
+    <div class="arrows-container" id="battle-arrows"></div>
+    <div class="scene-content scene-content-center battle-content" id="s10-content">
+      <div class="scene-number red-number">X</div>
+      <h2 class="scene-title red-title" id="s10-title">The Great<br>Battle</h2>
+      <div class="scene-divider red-divider"></div>
+      <p class="scene-body">Rama built a bridge of rocks across the ocean — each stone inscribed with his name, floating
+        by the power of devotion. The vast army of Vanaras crossed to Lanka. The battle that followed shook the three
+        worlds for days and nights without ceasing.</p>
+      <p class="scene-body">Ravana's generals fell one by one. When his son Indrajit mortally wounded Lakshmana, Hanuman
+        flew to the Himalayas and carried back an entire mountain bearing the life-restoring herb Sanjeevani. No matter
+        what demons they sent, Rama's army did not break.</p>
+      <div class="scene-characters">
+        <span class="char-tag gold">The Vanara Army</span>
+        <span class="char-tag red-tag">Indrajit · Kumbhakarna</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 11 — RAVANA'S DEFEAT
+  ══════════════════════════════════════ -->
+  <section id="scene-11" class="scene scene-victory" data-chapter="Ravana's Defeat" aria-labelledby="s11-title">
+    <div class="victory-sky" id="victory-sky"></div>
+    <div class="victory-light" id="victory-light"></div>
+    <div class="brahmastra-arrow" id="brahmastra">
+      <svg viewBox="0 0 400 40" class="arrow-svg">
+        <defs>
+          <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f5b942" stop-opacity="0" />
+            <stop offset="50%" stop-color="#f5b942" />
+            <stop offset="80%" stop-color="#fff8e1" />
+            <stop offset="100%" stop-color="#f5b942" />
+          </linearGradient>
+          <filter id="arrowGlow">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <rect x="0" y="18" width="360" height="4" fill="url(#arrowGrad)" filter="url(#arrowGlow)" />
+        <polygon points="360,10 400,20 360,30" fill="#f5b942" filter="url(#arrowGlow)" />
+        <ellipse cx="180" cy="20" rx="180" ry="8" fill="#f5b94240" />
+      </svg>
+    </div>
+    <div class="ravana-fall" id="ravana-fall">
+      <svg viewBox="0 0 200 300" class="ravana-fall-svg">
+        <g fill="#3d0000" opacity="0.9" id="ravana-fall-body">
+          <!-- Falling Ravana - multiple heads, ten arms -->
+          <circle cx="85" cy="40" r="15" />
+          <circle cx="100" cy="30" r="14" />
+          <circle cx="115" cy="40" r="15" />
+          <circle cx="70" cy="50" r="12" />
+          <circle cx="130" cy="50" r="12" />
+          <rect x="75" y="55" width="50" height="80" rx="10" />
+          <!-- Crown -->
+          <polygon points="85,18 90,5 95,18 100,0 105,18 110,5 115,18" fill="#8b0000" />
+          <!-- Arms in all directions - defeated -->
+          <line x1="80" y1="70" x2="20" y2="30" stroke="#3d0000" stroke-width="8" stroke-linecap="round" />
+          <line x1="80" y1="85" x2="15" y2="75" stroke="#3d0000" stroke-width="8" stroke-linecap="round" />
+          <line x1="80" y1="100" x2="20" y2="115" stroke="#3d0000" stroke-width="8" stroke-linecap="round" />
+          <line x1="80" y1="115" x2="25" y2="140" stroke="#3d0000" stroke-width="8" stroke-linecap="round" />
+          <line x1="120" y1="70" x2="180" y2="30" stroke="#3d0000" stroke-width="8" stroke-linecap="round" />
+          <line x1="120" y1="85" x2="185" y2="75" stroke="#3d0000" stroke-width="8" stroke-linecap="round" />
+          <line x1="120" y1="100" x2="180" y2="115" stroke="#3d0000" stroke-width="8" stroke-linecap="round" />
+          <line x1="120" y1="115" x2="175" y2="140" stroke="#3d0000" stroke-width="8" stroke-linecap="round" />
+          <!-- Legs -->
+          <rect x="77" y="130" width="20" height="60" rx="8" transform="rotate(20 87 160)" />
+          <rect x="103" y="130" width="20" height="60" rx="8" transform="rotate(-15 113 160)" />
+        </g>
+      </svg>
+    </div>
+    <div class="scene-content scene-content-left victory-content" id="s11-content">
+      <div class="scene-number gold-number">XI</div>
+      <h2 class="scene-title gold-title" id="s11-title">Ravana's<br>Defeat</h2>
+      <div class="scene-divider gold-divider"></div>
+      <p class="scene-body">Finally Rama and Ravana stood face to face. They fought for days. Every time Rama severed
+        Ravana's head, a new one grew back. Then the sage Agastya revealed the secret: Rama must use the Brahmastra — a
+        weapon forged from the elements of creation.</p>
+      <p class="scene-body">Rama took the divine arrow, chanted the sacred mantras, and released it. It pierced Ravana's
+        chest where his immortality resided. The sky fell silent. The ten-headed demon who had terrorized the three
+        worlds for millennia fell — and light returned to the cosmos.</p>
+      <div class="scene-characters">
+        <span class="char-tag gold">The Brahmastra — Divine Arrow</span>
+        <span class="char-tag">Dharma Restored</span>
+      </div>
+    </div>
+    <div class="victory-particles" id="victory-particles"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SCENE 12 — RETURN TO AYODHYA
+  ══════════════════════════════════════ -->
+  <section id="scene-12" class="scene scene-return" data-chapter="Return to Ayodhya" aria-labelledby="s12-title">
+    <canvas id="diwaliCanvas" class="diwali-canvas"></canvas>
+    <div class="return-sky" id="return-sky"></div>
+    <div class="pushpaka-vimana" id="pushpaka">
+      <svg viewBox="0 0 400 200" class="vimana-svg">
+        <defs>
+          <radialGradient id="vimanaGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f5b942" stop-opacity="0.6" />
+            <stop offset="100%" stop-color="#f5b942" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <ellipse cx="200" cy="120" rx="180" ry="80" fill="url(#vimanaGlow)" />
+        <!-- Flying chariot -->
+        <ellipse cx="200" cy="130" rx="150" ry="40" fill="#d4a017" opacity="0.9" />
+        <ellipse cx="200" cy="120" rx="130" ry="35" fill="#f5b942" opacity="0.8" />
+        <rect x="100" y="70" width="200" height="50" rx="20" fill="#d4a017" />
+        <!-- Spires -->
+        <polygon points="180,70 185,20 190,70" fill="#f5b942" />
+        <polygon points="200,70 205,10 210,70" fill="#f5b942" />
+        <polygon points="220,70 225,25 230,70" fill="#f5b942" />
+        <!-- Divine glow -->
+        <ellipse cx="200" cy="100" rx="160" ry="60" fill="#f5b94210" />
+      </svg>
+    </div>
+    <div class="lamps-field" id="lamps"></div>
+    <div class="scene-content scene-content-center return-content" id="s12-content">
+      <div class="scene-number gold-number">XII</div>
+      <h2 class="scene-title gold-title" id="s12-title">Return to<br>Ayodhya</h2>
+      <div class="scene-divider gold-divider"></div>
+      <p class="scene-body">Fourteen years of exile ended. Rama, Sita, and Lakshmana returned to Ayodhya in the Pushpaka
+        Vimana — the divine flying chariot — as the entire kingdom waited below. Bharata had ruled only as regent,
+        keeping Rama's sandals on the throne as a symbol of true kingship.</p>
+      <p class="scene-body">The people of Ayodhya lit oil lamps in every doorway, on every rooftop, along every path —
+        ten thousand points of light driving away fourteen years of darkness. Heaven scattered flowers. This was the
+        first Diwali — the Festival of Lights — and it has been celebrated every year since.</p>
+      <div class="scene-characters">
+        <span class="char-tag gold">Diwali — Festival of Lights</span>
+        <span class="char-tag gold">Rama Rajya — The Perfect Kingdom</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════
+       CHARACTERS OF THE RAMAYANA
+  ══════════════════════════════════════ -->
+  <section id="characters-section" data-chapter="Characters of the Ramayana" aria-label="Characters">
+    <canvas id="charsStarCanvas" class="chars-bg-stars"
+      style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+
+    <div class="chars-title-wrap">
+      <p class="chars-eyebrow" id="chars-eyebrow">Hover to Illuminate · Click to Fire</p>
+      <h2 class="chars-heading" id="chars-heading">Souls of the Epic</h2>
+      <p class="chars-sub" id="chars-sub">The immortal characters of Valmiki's Ramayana</p>
+    </div>
+
+    <div class="chars-grid">
+
+      <!-- RAMA -->
+      <div class="char-card" id="cc-rama"
+        style="--char-color:#f5b942;--char-glow:rgba(245,185,66,.7);--char-aura-color:rgba(245,185,66,.15);--float-dur:4s;--float-delay:0s;"
+        data-name="Rama">
+        <div class="char-figure-wrap">
+          <div class="char-aura"></div>
+          <div class="char-halo"></div>
+          <div class="char-halo-2"></div>
+          <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="ramaAura" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#f5b942" stop-opacity=".35" />
+                <stop offset="100%" stop-color="#f5b942" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <ellipse cx="60" cy="100" rx="55" ry="90" fill="url(#ramaAura)" />
+            <!-- Crown/Kirita -->
+            <polygon points="45,28 48,10 52,22 56,5 60,20 64,5 68,22 72,10 75,28" fill="#f5b942" opacity=".95" />
+            <rect x="42" y="26" width="36" height="8" rx="3" fill="#d4a017" />
+            <!-- Jewel in crown -->
+            <circle cx="60" cy="22" r="4" fill="#fff8d0" />
+            <!-- Head -->
+            <ellipse cx="60" cy="52" rx="22" ry="24" fill="#c4845a" />
+            <!-- Hair -->
+            <path d="M38,45 Q60,30 82,45" fill="#1a0800" opacity=".9" />
+            <!-- Eyes - serene -->
+            <ellipse cx="52" cy="50" rx="6" ry="4" fill="#1a0800" />
+            <ellipse cx="68" cy="50" rx="6" ry="4" fill="#1a0800" />
+            <circle cx="52" cy="50" r="2.5" fill="#f5b942" />
+            <circle cx="68" cy="50" r="2.5" fill="#f5b942" />
+            <circle cx="53" cy="49" r="1" fill="white" />
+            <circle cx="69" cy="49" r="1" fill="white" />
+            <!-- Tilak -->
+            <rect x="57.5" y="40" width="5" height="8" rx="2.5" fill="#f5b942" opacity=".9" />
+            <!-- Nose, lips -->
+            <ellipse cx="60" cy="57" rx="4" ry="3" fill="#b07050" opacity=".6" />
+            <path d="M54,63 Q60,68 66,63" stroke="#a06040" stroke-width="1.5" fill="none" />
+            <!-- Ear ornaments -->
+            <circle cx="38" cy="54" r="5" fill="#d4a017" />
+            <circle cx="82" cy="54" r="5" fill="#d4a017" />
+            <!-- Body - royal garb -->
+            <rect x="42" y="76" width="36" height="70" rx="8" fill="#c47a1e" />
+            <!-- Chest ornament -->
+            <ellipse cx="60" cy="92" rx="14" ry="10" fill="#d4a017" opacity=".7" />
+            <circle cx="60" cy="92" r="5" fill="#f5b942" />
+            <!-- Sacred thread (yajnopavita) -->
+            <path d="M45,80 Q60,100 75,80" stroke="#f5e0a0" stroke-width="1.5" fill="none" opacity=".8" />
+            <!-- Dhoti -->
+            <path d="M42,146 Q60,160 78,146 L80,200 L40,200Z" fill="#f0c85a" opacity=".85" />
+            <!-- Arm with bow -->
+            <rect x="18" y="80" width="24" height="10" rx="5" fill="#c4845a" transform="rotate(20 30 85)" />
+            <!-- Bow -->
+            <path d="M8,60 Q-5,95 8,130" stroke="#8b5e0a" stroke-width="4" fill="none" stroke-linecap="round" />
+            <line x1="8" y1="60" x2="8" y2="130" stroke="#d4a017" stroke-width="1.5" stroke-dasharray="3,3" />
+            <!-- Arrow held -->
+            <line x1="12" y1="75" x2="40" y2="90" stroke="#f5b942" stroke-width="2" />
+            <polygon points="40,87 46,90 40,93" fill="#f5b942" />
+            <!-- Right arm -->
+            <rect x="78" y="80" width="22" height="10" rx="5" fill="#c4845a" transform="rotate(-15 89 85)" />
+            <!-- Legs -->
+            <rect x="44" y="160" width="16" height="38" rx="7" fill="#c4845a" />
+            <rect x="60" y="160" width="16" height="38" rx="7" fill="#c4845a" />
+            <!-- Feet / sandals -->
+            <ellipse cx="52" cy="197" rx="12" ry="5" fill="#8b5e0a" />
+            <ellipse cx="68" cy="197" rx="12" ry="5" fill="#8b5e0a" />
+            <!-- Divine glow at feet -->
+            <ellipse cx="60" cy="200" rx="30" ry="6" fill="rgba(245,185,66,.15)" />
+          </svg>
+          <div class="char-tooltip">Prince of Ayodhya · Seventh Avatar of Vishnu</div>
+        </div>
+        <div class="char-name">Rama</div>
+        <div class="char-epithet">Maryada Purushottam</div>
+      </div>
+
+      <!-- SITA -->
+      <div class="char-card" id="cc-sita"
+        style="--char-color:#ff9db5;--char-glow:rgba(255,157,181,.7);--char-aura-color:rgba(255,157,181,.12);--float-dur:5s;--float-delay:.8s;"
+        data-name="Sita">
+        <div class="char-figure-wrap">
+          <div class="char-aura"></div>
+          <div class="char-halo"></div>
+          <div class="char-halo-2"></div>
+          <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="sitaAura" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ff9db5" stop-opacity=".3" />
+                <stop offset="100%" stop-color="#ff9db5" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <ellipse cx="60" cy="100" rx="55" ry="90" fill="url(#sitaAura)" />
+            <!-- Flower crown -->
+            <g fill="#ff6b8a" opacity=".9">
+              <circle cx="48" cy="22" r="6" />
+              <circle cx="60" cy="16" r="7" />
+              <circle cx="72" cy="22" r="6" />
+              <circle cx="42" cy="30" r="5" />
+              <circle cx="78" cy="30" r="5" />
+            </g>
+            <g fill="#ffb3c6" opacity=".7">
+              <circle cx="48" cy="22" r="3.5" />
+              <circle cx="60" cy="16" r="4.5" />
+              <circle cx="72" cy="22" r="3.5" />
+            </g>
+            <!-- Head -->
+            <ellipse cx="60" cy="52" rx="20" ry="22" fill="#e8a882" />
+            <!-- Hair - long, braided -->
+            <path d="M40,48 Q38,80 42,120 L46,120 Q44,80 45,48Z" fill="#1a0800" />
+            <path d="M80,48 Q82,80 78,120 L74,120 Q76,80 75,48Z" fill="#1a0800" />
+            <path d="M40,46 Q60,35 80,46" fill="#1a0800" />
+            <!-- Bindi -->
+            <circle cx="60" cy="40" r="3.5" fill="#ff2d78" />
+            <!-- Eyes -->
+            <path d="M47,50 Q53,46 59,50 Q53,54 47,50Z" fill="#1a0800" />
+            <path d="M61,50 Q67,46 73,50 Q67,54 61,50Z" fill="#1a0800" />
+            <circle cx="53" cy="50" r="2" fill="#6b3e08" />
+            <circle cx="67" cy="50" r="2" fill="#6b3e08" />
+            <circle cx="54" cy="49" r="1" fill="white" />
+            <circle cx="68" cy="49" r="1" fill="white" />
+            <!-- Lips -->
+            <path d="M54,62 Q60,67 66,62" stroke="#e05070" stroke-width="1.5" fill="none" />
+            <!-- Ear ornaments - jhumkas -->
+            <circle cx="40" cy="55" r="6" fill="#ff9db5" opacity=".9" />
+            <ellipse cx="40" cy="62" rx="4" ry="6" fill="#ff6b8a" opacity=".8" />
+            <circle cx="80" cy="55" r="6" fill="#ff9db5" opacity=".9" />
+            <ellipse cx="80" cy="62" rx="4" ry="6" fill="#ff6b8a" opacity=".8" />
+            <!-- Neck ornament (mangalsutra) -->
+            <path d="M46,74 Q60,85 74,74" stroke="#d4a017" stroke-width="2" fill="none" />
+            <!-- Saree body -->
+            <path d="M38,76 Q60,70 82,76 L84,155 Q60,165 36,155Z" fill="#ff6b8a" opacity=".85" />
+            <!-- Saree drape -->
+            <path d="M38,80 Q30,100 32,130 Q20,120 22,140" stroke="#ff9db5" stroke-width="12" fill="none"
+              stroke-linecap="round" opacity=".7" />
+            <!-- Gold border on saree -->
+            <path d="M38,76 Q60,70 82,76" stroke="#f5b942" stroke-width="2" fill="none" />
+            <path d="M36,155 Q60,165 84,155" stroke="#f5b942" stroke-width="2" fill="none" />
+            <!-- Arms with bangles -->
+            <rect x="18" y="90" width="22" height="9" rx="4.5" fill="#e8a882" transform="rotate(15 29 95)" />
+            <rect x="80" y="90" width="22" height="9" rx="4.5" fill="#e8a882" transform="rotate(-15 91 95)" />
+            <!-- Bangles -->
+            <circle cx="26" cy="100" r="5" fill="none" stroke="#f5b942" stroke-width="2" />
+            <circle cx="94" cy="100" r="5" fill="none" stroke="#f5b942" stroke-width="2" />
+            <!-- Lotus in hand -->
+            <g transform="translate(10,108)">
+              <circle cx="0" cy="0" r="8" fill="#ff9db5" opacity=".8" />
+              <circle cx="0" cy="0" r="4" fill="#ffb3c6" />
+            </g>
+            <!-- Legs (hidden by saree) -->
+            <path d="M40,155 L38,198 Q60,204 82,198 L80,155Z" fill="#ff6b8a" opacity=".6" />
+            <!-- Feet -->
+            <ellipse cx="48" cy="197" rx="11" ry="4" fill="#e8a882" />
+            <ellipse cx="72" cy="197" rx="11" ry="4" fill="#e8a882" />
+            <ellipse cx="60" cy="200" rx="28" ry="5" fill="rgba(255,157,181,.15)" />
+          </svg>
+          <div class="char-tooltip">Princess of Mithila · Born of the Sacred Earth</div>
+        </div>
+        <div class="char-name">Sita</div>
+        <div class="char-epithet">Janaki · Daughter of the Earth</div>
+      </div>
+
+      <!-- HANUMAN -->
+      <div class="char-card" id="cc-hanuman"
+        style="--char-color:#ff8c00;--char-glow:rgba(255,140,0,.7);--char-aura-color:rgba(255,140,0,.15);--float-dur:3.5s;--float-delay:.4s;"
+        data-name="Hanuman">
+        <div class="char-figure-wrap">
+          <div class="char-aura"></div>
+          <div class="char-halo"></div>
+          <div class="char-halo-2"></div>
+          <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="hanuAura" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ff8c00" stop-opacity=".4" />
+                <stop offset="100%" stop-color="#ff8c00" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <ellipse cx="60" cy="100" rx="55" ry="90" fill="url(#hanuAura)" />
+            <!-- Crown/Mukut -->
+            <polygon points="44,18 48,5 54,16 60,3 66,16 72,5 76,18" fill="#f5b942" />
+            <rect x="42" y="16" width="36" height="10" rx="4" fill="#d4a017" />
+            <!-- Head - monkey face -->
+            <ellipse cx="60" cy="52" rx="24" ry="26" fill="#c47a1e" />
+            <!-- Monkey brow ridge -->
+            <path d="M36,46 Q60,38 84,46" fill="#a05a10" opacity=".6" />
+            <!-- Eyes - fierce devotion -->
+            <ellipse cx="50" cy="50" rx="8" ry="6" fill="#1a0800" />
+            <ellipse cx="70" cy="50" rx="8" ry="6" fill="#1a0800" />
+            <circle cx="50" cy="50" r="4" fill="#ff8c00" />
+            <circle cx="70" cy="50" r="4" fill="#ff8c00" />
+            <circle cx="51" cy="49" r="1.5" fill="white" />
+            <circle cx="71" cy="49" r="1.5" fill="white" />
+            <!-- Snout / muzzle -->
+            <ellipse cx="60" cy="62" rx="14" ry="12" fill="#a05a10" />
+            <ellipse cx="60" cy="62" rx="10" ry="8" fill="#8b4a0a" />
+            <!-- Nose -->
+            <ellipse cx="60" cy="58" rx="5" ry="4" fill="#7a3a08" />
+            <!-- Mouth smile -->
+            <path d="M50,68 Q60,76 70,68" stroke="#6b3008" stroke-width="2" fill="none" />
+            <!-- Ear -->
+            <circle cx="36" cy="50" r="8" fill="#c47a1e" />
+            <circle cx="84" cy="50" r="8" fill="#c47a1e" />
+            <!-- Sacred thread -->
+            <path d="M44,80 Q60,100 76,80" stroke="#f5e0a0" stroke-width="2" fill="none" opacity=".9" />
+            <!-- Powerful body -->
+            <rect x="40" y="78" width="40" height="72" rx="10" fill="#c47a1e" />
+            <!-- Muscles suggest -->
+            <ellipse cx="50" cy="95" rx="10" ry="14" fill="#d4893a" opacity=".5" />
+            <ellipse cx="70" cy="95" rx="10" ry="14" fill="#d4893a" opacity=".5" />
+            <!-- Dhoti - orange -->
+            <path d="M40,148 Q60,162 80,148 L82,198 L38,198Z" fill="#f5b942" opacity=".85" />
+            <!-- Strong arms -->
+            <rect x="12" y="80" width="30" height="14" rx="7" fill="#c47a1e" transform="rotate(25 27 87)" />
+            <rect x="78" y="80" width="30" height="14" rx="7" fill="#c47a1e" transform="rotate(-25 93 87)" />
+            <!-- Gada (mace) in right hand -->
+            <rect x="98" y="90" width="6" height="50" rx="3" fill="#8b5e0a" />
+            <ellipse cx="101" cy="88" rx="10" ry="8" fill="#d4a017" />
+            <ellipse cx="101" cy="140" rx="8" ry="6" fill="#d4a017" />
+            <!-- Tail curling up behind -->
+            <path d="M80,148 Q110,120 105,80 Q100,55 115,45" stroke="#c47a1e" stroke-width="10" fill="none"
+              stroke-linecap="round" />
+            <circle cx="115" cy="43" r="7" fill="#f5b942" />
+            <!-- Legs -->
+            <rect x="42" y="164" width="16" height="34" rx="7" fill="#c47a1e" />
+            <rect x="62" y="164" width="16" height="34" rx="7" fill="#c47a1e" />
+            <ellipse cx="50" cy="197" rx="11" ry="4" fill="#8b5e0a" />
+            <ellipse cx="70" cy="197" rx="11" ry="4" fill="#8b5e0a" />
+            <ellipse cx="60" cy="200" rx="30" ry="5" fill="rgba(255,140,0,.15)" />
+          </svg>
+          <div class="char-tooltip">Son of Vayu · Greatest Devotee of Rama</div>
+        </div>
+        <div class="char-name">Hanuman</div>
+        <div class="char-epithet">Pavanputra · Mahavira</div>
+      </div>
+
+      <!-- RAVANA -->
+      <div class="char-card" id="cc-ravana"
+        style="--char-color:#ff4040;--char-glow:rgba(255,64,64,.7);--char-aura-color:rgba(139,0,0,.2);--float-dur:4.5s;--float-delay:1.2s;"
+        data-name="Ravana">
+        <div class="char-figure-wrap">
+          <div class="char-aura"></div>
+          <div class="char-halo" style="border-color:rgba(139,0,0,.4)"></div>
+          <div class="char-halo-2" style="border-color:rgba(139,0,0,.2)"></div>
+          <svg viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="ravAura" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#8b0000" stop-opacity=".4" />
+                <stop offset="100%" stop-color="#8b0000" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <ellipse cx="60" cy="110" rx="55" ry="95" fill="url(#ravAura)" />
+            <!-- Ten crowns suggestion -->
+            <g fill="#8b0000" opacity=".9">
+              <polygon points="28,25 30,12 33,20 36,8 39,20 41,12 44,25" />
+              <polygon points="48,22 50,9 53,17 56,5 59,17 61,9 64,22" />
+              <polygon points="68,22 70,9 73,17 76,5 79,17 81,9 84,22" />
+              <polygon points="88,25 90,12 93,20 96,8 99,20 101,12 104,25" />
+            </g>
+            <!-- Main head -->
+            <ellipse cx="60" cy="55" rx="22" ry="24" fill="#8b3020" />
+            <!-- Side heads (smaller) -->
+            <ellipse cx="30" cy="50" rx="14" ry="15" fill="#7a2015" />
+            <ellipse cx="90" cy="50" rx="14" ry="15" fill="#7a2015" />
+            <!-- Main eyes - fierce red -->
+            <ellipse cx="52" cy="52" rx="7" ry="5" fill="#ff0000" />
+            <ellipse cx="68" cy="52" rx="7" ry="5" fill="#ff0000" />
+            <circle cx="52" cy="52" r="3" fill="#1a0000" />
+            <circle cx="68" cy="52" r="3" fill="#1a0000" />
+            <!-- Side head eyes -->
+            <ellipse cx="25" cy="48" rx="5" ry="4" fill="#ff0000" opacity=".8" />
+            <ellipse cx="95" cy="48" rx="5" ry="4" fill="#ff0000" opacity=".8" />
+            <!-- Ten mustaches/fierce expressions -->
+            <path d="M46,60 Q52,65 58,60" stroke="#5a0000" stroke-width="2" fill="none" />
+            <path d="M62,60 Q68,65 74,60" stroke="#5a0000" stroke-width="2" fill="none" />
+            <!-- Body - dark imposing -->
+            <rect x="36" y="79" width="48" height="80" rx="8" fill="#5a1010" />
+            <!-- Chest - armor -->
+            <ellipse cx="60" cy="100" rx="20" ry="16" fill="#8b0000" opacity=".7" />
+            <ellipse cx="60" cy="100" rx="10" ry="8" fill="#ff2020" opacity=".4" />
+            <!-- Ten arms (5 each side) -->
+            <line x1="36" y1="85" x2="5" y2="70" stroke="#8b3020" stroke-width="8" stroke-linecap="round" />
+            <line x1="36" y1="93" x2="3" y2="85" stroke="#7a2015" stroke-width="7" stroke-linecap="round" />
+            <line x1="36" y1="101" x2="4" y2="105" stroke="#8b3020" stroke-width="7" stroke-linecap="round" />
+            <line x1="36" y1="109" x2="8" y2="125" stroke="#7a2015" stroke-width="6" stroke-linecap="round" />
+            <line x1="36" y1="117" x2="12" y2="142" stroke="#8b3020" stroke-width="6" stroke-linecap="round" />
+            <line x1="84" y1="85" x2="115" y2="70" stroke="#8b3020" stroke-width="8" stroke-linecap="round" />
+            <line x1="84" y1="93" x2="117" y2="85" stroke="#7a2015" stroke-width="7" stroke-linecap="round" />
+            <line x1="84" y1="101" x2="116" y2="105" stroke="#8b3020" stroke-width="7" stroke-linecap="round" />
+            <line x1="84" y1="109" x2="112" y2="125" stroke="#7a2015" stroke-width="6" stroke-linecap="round" />
+            <line x1="84" y1="117" x2="108" y2="142" stroke="#8b3020" stroke-width="6" stroke-linecap="round" />
+            <!-- Weapons in hands -->
+            <circle cx="5" cy="68" r="8" fill="#d4a017" opacity=".8" />
+            <rect x="112" y="62" width="5" height="20" rx="2" fill="#d4a017" opacity=".8" />
+            <!-- Dhoti - dark red -->
+            <path d="M36,158 Q60,170 84,158 L86,210 L34,210Z" fill="#8b0000" opacity=".8" />
+            <!-- Legs -->
+            <rect x="38" y="172" width="18" height="36" rx="7" fill="#7a2015" />
+            <rect x="64" y="172" width="18" height="36" rx="7" fill="#7a2015" />
+            <ellipse cx="47" cy="207" rx="12" ry="4" fill="#5a0a0a" />
+            <ellipse cx="73" cy="207" rx="12" ry="4" fill="#5a0a0a" />
+            <ellipse cx="60" cy="212" rx="30" ry="5" fill="rgba(139,0,0,.2)" />
+          </svg>
+          <div class="char-tooltip">King of Lanka · Ten-Headed Demon Lord</div>
+        </div>
+        <div class="char-name">Ravana</div>
+        <div class="char-epithet">Dashanan · King of Lanka</div>
+      </div>
+
+      <!-- LAKSHMANA -->
+      <div class="char-card" id="cc-lakshmana"
+        style="--char-color:#60d0ff;--char-glow:rgba(96,208,255,.6);--char-aura-color:rgba(96,208,255,.1);--float-dur:4.2s;--float-delay:.5s;"
+        data-name="Lakshmana">
+        <div class="char-figure-wrap">
+          <div class="char-aura"></div>
+          <div class="char-halo"></div>
+          <div class="char-halo-2"></div>
+          <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="lakshAura" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#60d0ff" stop-opacity=".3" />
+                <stop offset="100%" stop-color="#60d0ff" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <ellipse cx="60" cy="100" rx="55" ry="90" fill="url(#lakshAura)" />
+            <!-- Crown -->
+            <polygon points="44,24 47,8 52,20 57,6 62,20 67,6 72,20 77,8 80,24" fill="#60d0ff" opacity=".9" />
+            <rect x="42" y="22" width="36" height="8" rx="3" fill="#4ab0df" />
+            <!-- Head -->
+            <ellipse cx="60" cy="52" rx="21" ry="23" fill="#c4845a" />
+            <!-- Hair -->
+            <path d="M39,46 Q60,32 81,46" fill="#1a0800" opacity=".9" />
+            <!-- Eyes - alert, protective -->
+            <ellipse cx="51" cy="50" rx="6" ry="5" fill="#1a0800" />
+            <ellipse cx="69" cy="50" rx="6" ry="5" fill="#1a0800" />
+            <circle cx="51" cy="50" r="2.5" fill="#60d0ff" />
+            <circle cx="69" cy="50" r="2.5" fill="#60d0ff" />
+            <circle cx="52" cy="49" r="1" fill="white" />
+            <circle cx="70" cy="49" r="1" fill="white" />
+            <!-- Tilak -->
+            <rect x="57.5" y="40" width="5" height="7" rx="2.5" fill="#60d0ff" opacity=".9" />
+            <!-- Lips -->
+            <path d="M54,62 Q60,67 66,62" stroke="#a06040" stroke-width="1.5" fill="none" />
+            <!-- Ear ornaments -->
+            <circle cx="39" cy="54" r="5" fill="#4ab0df" />
+            <circle cx="81" cy="54" r="5" fill="#4ab0df" />
+            <!-- Body - warrior garb (blue/cyan) -->
+            <rect x="42" y="76" width="36" height="72" rx="8" fill="#2a7090" />
+            <!-- Armor -->
+            <ellipse cx="60" cy="92" rx="14" ry="10" fill="#4ab0df" opacity=".6" />
+            <!-- Sacred thread -->
+            <path d="M45,80 Q60,100 75,80" stroke="#f5e0a0" stroke-width="1.5" fill="none" opacity=".8" />
+            <!-- Dhoti -->
+            <path d="M42,146 Q60,160 78,146 L80,200 L40,200Z" fill="#60d0ff" opacity=".7" />
+            <!-- Arms -->
+            <rect x="15" y="82" width="28" height="10" rx="5" fill="#c4845a" transform="rotate(20 29 87)" />
+            <rect x="77" y="82" width="28" height="10" rx="5" fill="#c4845a" transform="rotate(-20 91 87)" />
+            <!-- Sword in hand -->
+            <rect x="92" y="88" width="5" height="55" rx="2" fill="#c0c0c0" />
+            <rect x="86" y="88" width="18" height="5" rx="2" fill="#d4a017" />
+            <polygon points="92,143 94.5,158 97,143" fill="#e0e0e0" />
+            <!-- Quiver with arrows -->
+            <rect x="8" y="70" width="12" height="40" rx="4" fill="#4a2a08" transform="rotate(10 14 90)" />
+            <line x1="10" y1="72" x2="14" y2="68" stroke="#f5b942" stroke-width="2" />
+            <line x1="14" y1="70" x2="18" y2="66" stroke="#f5b942" stroke-width="2" />
+            <!-- Legs -->
+            <rect x="44" y="162" width="16" height="36" rx="7" fill="#c4845a" />
+            <rect x="60" y="162" width="16" height="36" rx="7" fill="#c4845a" />
+            <ellipse cx="52" cy="197" rx="11" ry="4" fill="#8b5e0a" />
+            <ellipse cx="68" cy="197" rx="11" ry="4" fill="#8b5e0a" />
+            <ellipse cx="60" cy="200" rx="28" ry="5" fill="rgba(96,208,255,.12)" />
+          </svg>
+          <div class="char-tooltip">Prince of Ayodhya · Eternal Guardian of Rama</div>
+        </div>
+        <div class="char-name">Lakshmana</div>
+        <div class="char-epithet">The Devoted Brother</div>
+      </div>
+
+      <!-- VIBHISHANA -->
+      <div class="char-card" id="cc-vibhishana"
+        style="--char-color:#a0ff80;--char-glow:rgba(160,255,128,.6);--char-aura-color:rgba(160,255,128,.1);--float-dur:5.5s;--float-delay:1.8s;"
+        data-name="Vibhishana">
+        <div class="char-figure-wrap">
+          <div class="char-aura"></div>
+          <div class="char-halo"></div>
+          <div class="char-halo-2"></div>
+          <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="vibAura" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#a0ff80" stop-opacity=".3" />
+                <stop offset="100%" stop-color="#a0ff80" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <ellipse cx="60" cy="100" rx="55" ry="90" fill="url(#vibAura)" />
+            <!-- Simple crown (righteous demon) -->
+            <polygon points="46,28 49,12 54,22 59,8 64,22 69,12 74,28" fill="#a0ff80" opacity=".8" />
+            <rect x="44" y="26" width="32" height="8" rx="3" fill="#60c040" />
+            <!-- Head - dark complexion (rakshasa) but serene eyes -->
+            <ellipse cx="60" cy="54" rx="22" ry="24" fill="#4a2040" />
+            <!-- Hair -->
+            <path d="M38,48 Q60,36 82,48" fill="#1a0010" opacity=".9" />
+            <!-- Serene eyes (chose righteousness) -->
+            <ellipse cx="51" cy="52" rx="7" ry="5" fill="#1a0010" />
+            <ellipse cx="69" cy="52" rx="7" ry="5" fill="#1a0010" />
+            <circle cx="51" cy="52" r="3" fill="#a0ff80" />
+            <circle cx="69" cy="52" r="3" fill="#a0ff80" />
+            <circle cx="52" cy="51" r="1.2" fill="white" />
+            <circle cx="70" cy="51" r="1.2" fill="white" />
+            <!-- Tilak (chosen dharma) -->
+            <rect x="57.5" y="40" width="5" height="8" rx="2.5" fill="#a0ff80" opacity=".9" />
+            <!-- Tusks (rakshasa feature, small - he is dharmic) -->
+            <rect x="50" y="65" width="4" height="10" rx="2" fill="#f0f0e0" opacity=".7" />
+            <rect x="66" y="65" width="4" height="10" rx="2" fill="#f0f0e0" opacity=".7" />
+            <!-- Ear ornaments -->
+            <circle cx="38" cy="56" r="5" fill="#60c040" />
+            <circle cx="82" cy="56" r="5" fill="#60c040" />
+            <!-- Body - robe (humble) -->
+            <rect x="40" y="80" width="40" height="72" rx="10" fill="#2a4020" />
+            <!-- Dharma symbol on chest -->
+            <circle cx="60" cy="100" r="10" fill="#a0ff80" opacity=".3" />
+            <circle cx="60" cy="100" r="5" fill="#60c040" opacity=".5" />
+            <!-- Sacred beads (chose Rama) -->
+            <path d="M46,82 Q60,90 74,82" stroke="#f5e0a0" stroke-width="2" fill="none" opacity=".7" />
+            <!-- Dhoti -->
+            <path d="M40,150 Q60,164 80,150 L82,200 L38,200Z" fill="#a0ff80" opacity=".5" />
+            <!-- Arms -->
+            <rect x="16" y="86" width="26" height="10" rx="5" fill="#4a2040" transform="rotate(15 29 91)" />
+            <rect x="78" y="86" width="26" height="10" rx="5" fill="#4a2040" transform="rotate(-15 91 91)" />
+            <!-- Joined hands (namaste to Rama) -->
+            <ellipse cx="24" cy="105" rx="9" ry="6" fill="#4a2040" transform="rotate(10 24 105)" />
+            <ellipse cx="36" cy="112" rx="9" ry="6" fill="#4a2040" transform="rotate(-5 36 112)" />
+            <!-- Legs -->
+            <rect x="42" y="163" width="16" height="35" rx="7" fill="#4a2040" />
+            <rect x="62" y="163" width="16" height="35" rx="7" fill="#4a2040" />
+            <ellipse cx="50" cy="197" rx="11" ry="4" fill="#2a1030" />
+            <ellipse cx="70" cy="197" rx="11" ry="4" fill="#2a1030" />
+            <ellipse cx="60" cy="200" rx="28" ry="5" fill="rgba(160,255,128,.1)" />
+          </svg>
+          <div class="char-tooltip">Brother of Ravana · Who Chose Dharma Over Kin</div>
+        </div>
+        <div class="char-name">Vibhishana</div>
+        <div class="char-epithet">The Righteous Rakshasa</div>
+      </div>
+
+      <!-- SUGRIVA -->
+      <div class="char-card" id="cc-sugriva"
+        style="--char-color:#ffb347;--char-glow:rgba(255,179,71,.6);--char-aura-color:rgba(255,179,71,.12);--float-dur:4.8s;--float-delay:2.2s;"
+        data-name="Sugriva">
+        <div class="char-figure-wrap">
+          <div class="char-aura"></div>
+          <div class="char-halo"></div>
+          <div class="char-halo-2"></div>
+          <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="sugAura" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffb347" stop-opacity=".3" />
+                <stop offset="100%" stop-color="#ffb347" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <ellipse cx="60" cy="100" rx="55" ry="90" fill="url(#sugAura)" />
+            <!-- Monkey King crown -->
+            <polygon points="44,26 47,10 52,22 57,8 62,22 67,8 72,22 77,10 80,26" fill="#ffb347" />
+            <rect x="42" y="24" width="36" height="10" rx="4" fill="#e09030" />
+            <!-- Monkey head -->
+            <ellipse cx="60" cy="52" rx="24" ry="26" fill="#b06a18" />
+            <!-- Monkey brow -->
+            <path d="M36,44 Q60,36 84,44" fill="#8a4a08" opacity=".7" />
+            <!-- Eyes - royal bearing -->
+            <ellipse cx="50" cy="50" rx="8" ry="6" fill="#1a0800" />
+            <ellipse cx="70" cy="50" rx="8" ry="6" fill="#1a0800" />
+            <circle cx="50" cy="50" r="3.5" fill="#ffb347" />
+            <circle cx="70" cy="50" r="3.5" fill="#ffb347" />
+            <circle cx="51" cy="49" r="1.5" fill="white" />
+            <circle cx="71" cy="49" r="1.5" fill="white" />
+            <!-- Muzzle -->
+            <ellipse cx="60" cy="63" rx="14" ry="12" fill="#9a5a10" />
+            <ellipse cx="60" cy="58" rx="5" ry="4" fill="#7a3a08" />
+            <!-- Royal insignia on forehead -->
+            <path d="M53,38 Q60,33 67,38" stroke="#ffb347" stroke-width="2" fill="none" />
+            <!-- Ear -->
+            <circle cx="36" cy="50" r="9" fill="#b06a18" />
+            <circle cx="84" cy="50" r="9" fill="#b06a18" />
+            <!-- Royal body -->
+            <rect x="40" y="78" width="40" height="72" rx="10" fill="#8b4e10" />
+            <!-- King's ornaments -->
+            <path d="M44,82 Q60,90 76,82" stroke="#f5b942" stroke-width="3" fill="none" />
+            <circle cx="60" cy="96" r="10" fill="#d4a017" opacity=".5" />
+            <!-- Dhoti - royal orange -->
+            <path d="M40,148 Q60,162 80,148 L82,200 L38,200Z" fill="#ffb347" opacity=".75" />
+            <!-- Arms -->
+            <rect x="14" y="82" width="28" height="12" rx="6" fill="#b06a18" transform="rotate(20 28 88)" />
+            <rect x="78" y="82" width="28" height="12" rx="6" fill="#b06a18" transform="rotate(-20 92 88)" />
+            <!-- Tail -->
+            <path d="M80,148 Q108,118 100,80 Q95,55 110,48" stroke="#b06a18" stroke-width="9" fill="none"
+              stroke-linecap="round" />
+            <!-- Legs -->
+            <rect x="42" y="163" width="16" height="35" rx="7" fill="#b06a18" />
+            <rect x="62" y="163" width="16" height="35" rx="7" fill="#b06a18" />
+            <ellipse cx="50" cy="197" rx="11" ry="4" fill="#7a3a08" />
+            <ellipse cx="70" cy="197" rx="11" ry="4" fill="#7a3a08" />
+            <ellipse cx="60" cy="200" rx="28" ry="5" fill="rgba(255,179,71,.12)" />
+          </svg>
+          <div class="char-tooltip">Monkey King of Kishkindha · Ally of Rama</div>
+        </div>
+        <div class="char-name">Sugriva</div>
+        <div class="char-epithet">King of the Vanaras</div>
+      </div>
+
+      <!-- JATAYU -->
+      <div class="char-card" id="cc-jatayu"
+        style="--char-color:#c4a24a;--char-glow:rgba(196,162,74,.6);--char-aura-color:rgba(196,162,74,.1);--float-dur:3.8s;--float-delay:.3s;"
+        data-name="Jatayu">
+        <div class="char-figure-wrap">
+          <div class="char-aura"></div>
+          <div class="char-halo"></div>
+          <div class="char-halo-2"></div>
+          <svg viewBox="0 0 140 160" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="jatAura" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#c4a24a" stop-opacity=".35" />
+                <stop offset="100%" stop-color="#c4a24a" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <ellipse cx="70" cy="80" rx="65" ry="70" fill="url(#jatAura)" />
+            <!-- Great eagle - wings spread -->
+            <!-- Left wing -->
+            <path d="M70,75 Q40,30 5,25 Q20,55 30,80 Q50,70 70,75Z" fill="#8b6914" opacity=".9" />
+            <path d="M70,75 Q35,20 2,15 Q15,45 25,70" stroke="#c4a24a" stroke-width="1" fill="none" opacity=".5" />
+            <!-- Left wing feathers detail -->
+            <path d="M25,40 Q35,50 45,60" stroke="#a07820" stroke-width="1.5" fill="none" opacity=".6" />
+            <path d="M15,35 Q28,48 40,65" stroke="#a07820" stroke-width="1.5" fill="none" opacity=".5" />
+            <!-- Right wing -->
+            <path d="M70,75 Q100,30 135,25 Q120,55 110,80 Q90,70 70,75Z" fill="#8b6914" opacity=".9" />
+            <path d="M70,75 Q105,20 138,15 Q125,45 115,70" stroke="#c4a24a" stroke-width="1" fill="none" opacity=".5" />
+            <!-- Right wing feathers -->
+            <path d="M115,40 Q105,50 95,60" stroke="#a07820" stroke-width="1.5" fill="none" opacity=".6" />
+            <path d="M125,35 Q112,48 100,65" stroke="#a07820" stroke-width="1.5" fill="none" opacity=".5" />
+            <!-- Body -->
+            <ellipse cx="70" cy="80" rx="22" ry="28" fill="#9a7218" />
+            <!-- Chest lighter -->
+            <ellipse cx="70" cy="85" rx="14" ry="18" fill="#c4a24a" opacity=".7" />
+            <!-- Head -->
+            <ellipse cx="70" cy="52" rx="18" ry="18" fill="#7a5810" />
+            <!-- Crown feathers -->
+            <path d="M60,34 L58,20 M65,32 L63,16 M70,30 L70,14 M75,32 L77,16 M80,34 L82,20" stroke="#c4a24a"
+              stroke-width="3" stroke-linecap="round" />
+            <!-- Fierce eyes -->
+            <circle cx="62" cy="50" r="6" fill="#ff8c00" />
+            <circle cx="78" cy="50" r="6" fill="#ff8c00" />
+            <circle cx="62" cy="50" r="3" fill="#1a0800" />
+            <circle cx="78" cy="50" r="3" fill="#1a0800" />
+            <circle cx="63" cy="49" r="1.2" fill="white" />
+            <circle cx="79" cy="49" r="1.2" fill="white" />
+            <!-- Beak -->
+            <path d="M63,60 Q70,72 77,60 L70,65Z" fill="#d4a017" />
+            <!-- Talons -->
+            <path d="M58,106 L50,120 M62,108 L56,124 M68,110 L65,126 M74,108 L78,124" stroke="#7a5810" stroke-width="3"
+              stroke-linecap="round" />
+            <!-- Legendary status badge -->
+            <circle cx="70" cy="140" r="8" fill="#d4a017" opacity=".5" />
+            <text x="70" y="144" text-anchor="middle" fill="#fff8d0" font-size="8" font-family="serif">♦</text>
+            <ellipse cx="70" cy="148" rx="28" ry="5" fill="rgba(196,162,74,.12)" />
+          </svg>
+          <div class="char-tooltip">Son of Aruna · Gave His Life to Protect Sita</div>
+        </div>
+        <div class="char-name">Jatayu</div>
+        <div class="char-epithet">The Noble Vulture King</div>
+      </div>
+
+    </div><!-- end chars-grid -->
+  </section>
+
+  <!-- ══════════════════════════════════════
+       EPILOGUE — THE ETERNAL QUOTE
+  ══════════════════════════════════════ -->
+  <section id="epilogue" class="scene scene-epilogue" data-chapter="The Eternal Truth" aria-label="Epilogue">
+    <canvas id="epilogueCanvas" class="epilogue-canvas"></canvas>
+    <div class="epilogue-center">
+      <div class="lotus-symbol" id="lotus" aria-hidden="true">
+        <svg viewBox="0 0 120 120" class="lotus-svg">
+          <defs>
+            <radialGradient id="lotusGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f5b942" />
+              <stop offset="100%" stop-color="#d4a017" />
+            </radialGradient>
+          </defs>
+          <!-- Lotus petals -->
+          <g fill="url(#lotusGrad)" opacity="0.85">
+            <ellipse cx="60" cy="35" rx="10" ry="25" />
+            <ellipse cx="85" cy="45" rx="10" ry="25" transform="rotate(45 85 45)" />
+            <ellipse cx="85" cy="75" rx="10" ry="25" transform="rotate(90 85 75)" />
+            <ellipse cx="60" cy="85" rx="10" ry="25" transform="rotate(135 60 85)" />
+            <ellipse cx="35" cy="75" rx="10" ry="25" transform="rotate(180 35 75)" />
+            <ellipse cx="35" cy="45" rx="10" ry="25" transform="rotate(225 35 45)" />
+            <ellipse cx="60" cy="35" rx="10" ry="25" transform="rotate(270 60 35)" />
+            <ellipse cx="85" cy="45" rx="10" ry="25" transform="rotate(315 85 45)" />
+          </g>
+          <circle cx="60" cy="60" r="18" fill="#f5b942" />
+          <circle cx="60" cy="60" r="10" fill="#d4a017" />
+        </svg>
+      </div>
+      <blockquote class="epic-quote" id="epic-quote">
+        <p class="quote-devanagari" id="quote-dev">
+          यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।
+        </p>
+        <p class="quote-line" id="q1">"Whenever righteousness declines</p>
+        <p class="quote-line" id="q2">and evil rises,</p>
+        <p class="quote-line" id="q3">the divine appears."</p>
+        <cite class="quote-source" id="q4">— The Bhagavad Gita, 4.7</cite>
+      </blockquote>
+      <div class="epilogue-divider" id="epilogue-div"></div>
+      <p class="epilogue-attribution" id="epilogue-attr">
+        The Ramayana of Valmiki · 24,000 verses · composed 500 BCE
+      </p>
+      <p class="epilogue-closing" id="epilogue-close">
+        <em>Jai Shri Ram</em> &nbsp;·&nbsp; जय श्री राम
+      </p>
+    </div>
+    <div class="epilogue-particles" id="epilogue-p"></div>
+  </section>
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+  <script src="ramayana.js"></script>
+</body>
+
+</html>
