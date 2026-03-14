@@ -326,61 +326,171 @@
     <div class="parallax-layer layer-sky s2-sky"></div>
     <div class="s2-hall">
       <svg class="hall-svg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax meet">
-        <!-- Hall columns -->
-        <g fill="#1a0d05" opacity="0.85">
-          <rect x="80" y="50" width="30" height="550" />
-          <rect x="200" y="50" width="30" height="550" />
-          <rect x="320" y="50" width="30" height="550" />
-          <rect x="1110" y="50" width="30" height="550" />
-          <rect x="1230" y="50" width="30" height="550" />
-          <rect x="1350" y="50" width="30" height="550" />
-          <!-- Column caps -->
-          <rect x="60" y="45" width="70" height="20" rx="4" />
-          <rect x="180" y="45" width="70" height="20" rx="4" />
-          <rect x="300" y="45" width="70" height="20" rx="4" />
-          <rect x="1090" y="45" width="70" height="20" rx="4" />
-          <rect x="1210" y="45" width="70" height="20" rx="4" />
-          <rect x="1330" y="45" width="70" height="20" rx="4" />
+        <defs>
+          <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f5b942" stop-opacity="0.8" />
+            <stop offset="100%" stop-color="#f5b942" stop-opacity="0" />
+          </radialGradient>
+          <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#150a04" />
+            <stop offset="100%" stop-color="#080301" />
+          </linearGradient>
+        </defs>
+
+        <!-- Floor -->
+        <rect x="0" y="480" width="1440" height="120" fill="url(#floorGrad)" />
+        
+        <!-- Mandala Pattern on Floor -->
+        <g transform="translate(720, 520) scale(1, 0.3)" fill="none" stroke="#f5b942" stroke-width="1" opacity="0.2">
+          <circle cx="0" cy="0" r="150" />
+          <circle cx="0" cy="0" r="120" />
+          <path d="M-150,0 L150,0 M0,-150 L0,150 M-106,-106 L106,106 M-106,106 L106,-106" />
+          <path d="M0,-120 Q50,-50 120,0 Q50,50 0,120 Q-50,50 -120,0 Q-50,-50 0,-120 Z" />
         </g>
-        <!-- Bow pedestal -->
-        <rect x="620" y="300" width="200" height="20" rx="5" fill="#3d2310" />
-        <rect x="660" y="260" width="120" height="40" rx="6" fill="#2a1608" />
-        <!-- The Bow of Shiva -->
-        <g id="shiva-bow" transform="translate(720,200)">
+
+        <!-- Grand Arches and Pillars -->
+        <g fill="#1a0d05" opacity="0.95">
+          <!-- Back Layer Arches -->
+          <path d="M80,80 Q140,20 200,80 L200,500 L80,500 Z" fill="#110702" opacity="0.6" />
+          <path d="M200,80 Q260,20 320,80 L320,500 L200,500 Z" fill="#110702" opacity="0.6" />
+          <path d="M1110,80 Q1170,20 1230,80 L1230,500 L1110,500 Z" fill="#110702" opacity="0.6" />
+          <path d="M1230,80 Q1290,20 1350,80 L1350,500 L1230,500 Z" fill="#110702" opacity="0.6" />
+          
+          <!-- Ornate Columns -->
+          <!-- Col 1 -->
+          <rect x="80" y="50" width="40" height="450" />
+          <rect x="70" y="45" width="60" height="20" rx="4" fill="#2a1608" />
+          <rect x="75" y="480" width="50" height="30" rx="4" fill="#2a1608" />
+          <line x1="100" y1="65" x2="100" y2="480" stroke="#f5b942" stroke-width="2" opacity="0.3" />
+          
+          <!-- Col 2 -->
+          <rect x="200" y="50" width="40" height="450" />
+          <rect x="190" y="45" width="60" height="20" rx="4" fill="#2a1608" />
+          <rect x="195" y="480" width="50" height="30" rx="4" fill="#2a1608" />
+          <line x1="220" y1="65" x2="220" y2="480" stroke="#f5b942" stroke-width="2" opacity="0.3" />
+          
+          <!-- Col 3 -->
+          <rect x="320" y="50" width="40" height="450" />
+          <rect x="310" y="45" width="60" height="20" rx="4" fill="#2a1608" />
+          <rect x="315" y="480" width="50" height="30" rx="4" fill="#2a1608" />
+          <line x1="340" y1="65" x2="340" y2="480" stroke="#f5b942" stroke-width="2" opacity="0.3" />
+
+          <!-- Col 4 -->
+          <rect x="1110" y="50" width="40" height="450" />
+          <rect x="1100" y="45" width="60" height="20" rx="4" fill="#2a1608" />
+          <rect x="1105" y="480" width="50" height="30" rx="4" fill="#2a1608" />
+          <line x1="1130" y1="65" x2="1130" y2="480" stroke="#f5b942" stroke-width="2" opacity="0.3" />
+
+          <!-- Col 5 -->
+          <rect x="1230" y="50" width="40" height="450" />
+          <rect x="1220" y="45" width="60" height="20" rx="4" fill="#2a1608" />
+          <rect x="1225" y="480" width="50" height="30" rx="4" fill="#2a1608" />
+          <line x1="1250" y1="65" x2="1250" y2="480" stroke="#f5b942" stroke-width="2" opacity="0.3" />
+
+          <!-- Col 6 -->
+          <rect x="1350" y="50" width="40" height="450" />
+          <rect x="1340" y="45" width="60" height="20" rx="4" fill="#2a1608" />
+          <rect x="1345" y="480" width="50" height="30" rx="4" fill="#2a1608" />
+          <line x1="1370" y1="65" x2="1370" y2="480" stroke="#f5b942" stroke-width="2" opacity="0.3" />
+        </g>
+
+        <!-- Hanging Lamps (Diyas / Chandeliers) -->
+        <g id="hanging-lamps">
+          <!-- Lamp 1 -->
+          <line x1="140" y1="0" x2="140" y2="150" stroke="#3d2310" stroke-width="2" />
+          <circle cx="140" cy="160" r="30" fill="url(#lampGlow)" opacity="0.5" />
+          <path d="M130,150 L150,150 L145,160 L135,160 Z" fill="#d4af37" />
+          <circle cx="140" cy="148" r="4" fill="#ffb942" />
+          
+          <!-- Lamp 2 -->
+          <line x1="260" y1="0" x2="260" y2="130" stroke="#3d2310" stroke-width="2" />
+          <circle cx="260" cy="140" r="25" fill="url(#lampGlow)" opacity="0.5" />
+          <path d="M252,130 L268,130 L264,138 L256,138 Z" fill="#d4af37" />
+          <circle cx="260" cy="128" r="3" fill="#ffb942" />
+
+          <!-- Lamp 3 -->
+          <line x1="1170" y1="0" x2="1170" y2="150" stroke="#3d2310" stroke-width="2" />
+          <circle cx="1170" cy="160" r="30" fill="url(#lampGlow)" opacity="0.5" />
+          <path d="M1160,150 L1180,150 L1175,160 L1165,160 Z" fill="#d4af37" />
+          <circle cx="1170" cy="148" r="4" fill="#ffb942" />
+
+          <!-- Lamp 4 -->
+          <line x1="1290" y1="0" x2="1290" y2="130" stroke="#3d2310" stroke-width="2" />
+          <circle cx="1290" cy="140" r="25" fill="url(#lampGlow)" opacity="0.5" />
+          <path d="M1282,130 L1298,130 L1294,138 L1286,138 Z" fill="#d4af37" />
+          <circle cx="1290" cy="128" r="3" fill="#ffb942" />
+        </g>
+
+        <!-- Swayamvara Bow Pedestal and Steps -->
+        <g transform="translate(0, 30)">
+          <rect x="580" y="320" width="280" height="15" rx="2" fill="#4a2e1b" />
+          <rect x="600" y="305" width="240" height="15" rx="2" fill="#5c3a21" />
+          <rect x="620" y="290" width="200" height="15" rx="2" fill="#754728" />
+          <rect x="650" y="250" width="140" height="40" rx="4" fill="#3a2214" stroke="#d4af37" stroke-width="2" />
+        </g>
+
+        <!-- The Bow of Shiva (Pinaka) -->
+        <g id="shiva-bow" transform="translate(720,225)">
+          <circle cx="0" cy="40" r="60" fill="#f5b942" opacity="0.15" class="divine-pulse" />
           <!-- Bow body -->
-          <path d="M-60,60 Q0,-40 60,60" stroke="#d4af37" stroke-width="8" fill="none" stroke-linecap="round" />
-          <path d="M-55,55 Q0,-35 55,55" stroke="#fff8d0" stroke-width="2" fill="none" opacity="0.6" /> <!-- Highlight -->
+          <path d="M-80,80 Q0,-50 80,80" stroke="#d4af37" stroke-width="12" fill="none" stroke-linecap="round" />
+          <path d="M-75,75 Q0,-45 75,75" stroke="#fff8d0" stroke-width="3" fill="none" opacity="0.8" /> <!-- Highlight -->
+          <!-- Intricate Bow Carvings -->
+          <path d="M-40,15 Q0,0 40,15" stroke="#8b4513" stroke-width="2" fill="none" opacity="0.7" />
+          <circle cx="0" cy="8" r="8" fill="none" stroke="#d4af37" stroke-width="2" />
+          
+          <!-- Snapped/Broken effect overlay (will be animated via CSS or JS later, currently intact but grand) -->
           <!-- Bow string -->
-          <line x1="-60" y1="60" x2="60" y2="60" stroke="#c8960c" stroke-width="3" stroke-dasharray="4,3" />
+          <line x1="-80" y1="80" x2="80" y2="80" stroke="#c8960c" stroke-width="4" stroke-dasharray="5,4" />
+          <line x1="-80" y1="80" x2="80" y2="80" stroke="#fff" stroke-width="1" opacity="0.5" />
+          
           <!-- Royal Arrow resting on bow -->
-          <g id="shiva-arrow" transform="translate(0, 50)">
+          <g id="shiva-arrow" transform="translate(0, 65)">
             <!-- Arrow shadow/glow -->
-            <line x1="-40" y1="0" x2="55" y2="0" stroke="#f5b942" stroke-width="6" opacity="0.2" filter="blur(2px)" />
+            <line x1="-60" y1="0" x2="70" y2="0" stroke="#f5b942" stroke-width="8" opacity="0.3" filter="blur(3px)" />
             <!-- Shaft -->
-            <line x1="-40" y1="0" x2="40" y2="0" stroke="#f5b942" stroke-width="3" />
-            <line x1="-40" y1="-1" x2="40" y2="-1" stroke="#fff8d0" stroke-width="1" /> <!-- Shaft highlight -->
+            <line x1="-60" y1="0" x2="50" y2="0" stroke="#f5b942" stroke-width="4" />
+            <line x1="-60" y1="-1" x2="50" y2="-1" stroke="#fff8d0" stroke-width="2" /> <!-- Shaft highlight -->
             <!-- Golden Feathers (Fletching) -->
-            <path d="M-40,0 L-55,-6 L-45,0 L-55,6 Z" fill="#c47a1e" />
-            <path d="M-42,0 L-50,-3 L-45,0 L-50,3 Z" fill="#ffd700" />
-            <line x1="-40" y1="0" x2="-55" y2="0" stroke="#8b5a0a" stroke-width="1" />
+            <path d="M-60,0 L-80,-8 L-65,0 L-80,8 Z" fill="#c47a1e" />
+            <path d="M-62,0 L-75,-5 L-65,0 L-75,5 Z" fill="#ffd700" />
             <!-- Ornate Arrowhead -->
-            <path d="M40,-4 L55,0 L40,4 Z" fill="#fff8d0" />
-            <path d="M42,-2 L50,0 L42,2 Z" fill="#f5b942" />
+            <path d="M50,-6 L70,0 L50,6 Z" fill="#fff8d0" />
+            <path d="M52,-3 L65,0 L52,3 Z" fill="#f5b942" />
             <!-- Glowing tip -->
-            <circle cx="55" cy="0" r="2.5" fill="#ffffff" />
-            <circle cx="55" cy="0" r="6" fill="#f5b942" opacity="0.6" filter="blur(1px)" />
+            <circle cx="70" cy="0" r="4" fill="#ffffff" />
+            <circle cx="70" cy="0" r="10" fill="#f5b942" opacity="0.8" filter="blur(2px)" />
           </g>
         </g>
-        <!-- Bow glow -->
-        <ellipse cx="720" cy="270" rx="80" ry="40" fill="#f5b94220" id="bow-glow-svg" />
-        <!-- Floor -->
-        <rect x="0" y="500" width="1440" height="100" fill="#0f0705" />
-        <!-- Flower petals decorative -->
-        <circle cx="400" cy="480" r="5" fill="#ff6b8a" opacity="0.6" />
-        <circle cx="500" cy="470" r="4" fill="#ffb3c6" opacity="0.5" />
-        <circle cx="700" cy="490" r="6" fill="#ff6b8a" opacity="0.6" />
-        <circle cx="900" cy="475" r="4" fill="#ffb3c6" opacity="0.5" />
-        <circle cx="1100" cy="485" r="5" fill="#ff6b8a" opacity="0.6" />
+
+        <!-- Silhouettes of Kings/Suitors watching in foreground -->
+        <g fill="#080301" opacity="0.85">
+          <path d="M50,480 Q70,430 90,480 Z" />
+          <path d="M120,500 Q140,440 160,500 Z" />
+          <path d="M220,520 Q240,460 260,520 Z" />
+          <path d="M350,540 Q380,480 410,540 Z" />
+          
+          <path d="M1000,540 Q1030,480 1060,540 Z" />
+          <path d="M1150,520 Q1170,460 1190,520 Z" />
+          <path d="M1250,500 Q1270,440 1290,500 Z" />
+          <path d="M1320,480 Q1340,430 1360,480 Z" />
+        </g>
+
+        <!-- Scattered Divine Flowers and Petals on Floor -->
+        <g>
+          <circle cx="400" cy="500" r="6" fill="#ff6b8a" opacity="0.8" />
+          <circle cx="415" cy="495" r="4" fill="#ffb3c6" opacity="0.7" />
+          <circle cx="480" cy="485" r="7" fill="#ffd700" opacity="0.6" />
+          <circle cx="500" cy="480" r="5" fill="#ffb3c6" opacity="0.8" />
+          <circle cx="680" cy="510" r="6" fill="#ff6b8a" opacity="0.7" />
+          <circle cx="700" cy="515" r="8" fill="#ffd700" opacity="0.9" />
+          <circle cx="750" cy="505" r="5" fill="#ffb3c6" opacity="0.8" />
+          <circle cx="780" cy="520" r="6" fill="#ff6b8a" opacity="0.7" />
+          <circle cx="900" cy="485" r="5" fill="#ffb3c6" opacity="0.8" />
+          <circle cx="920" cy="490" r="7" fill="#ffd700" opacity="0.6" />
+          <circle cx="1000" cy="510" r="6" fill="#ff6b8a" opacity="0.7" />
+          <circle cx="1100" cy="495" r="6" fill="#ff6b8a" opacity="0.8" />
+        </g>
       </svg>
     </div>
     <div class="bow-glow-effect" id="bow-glow"></div>
@@ -388,12 +498,8 @@
       <div class="scene-number">II</div>
       <h2 class="scene-title" id="s2-title">The Swayamvara<br>of Sita</h2>
       <div class="scene-divider"></div>
-      <p class="scene-body">In the kingdom of Mithila, King Janaka's daughter Sita — born of the sacred earth itself —
-        came of age for marriage. Janaka declared: only he who could lift and string the mighty bow of Lord Shiva would
-        win Sita's hand.</p>
-      <p class="scene-body">A hundred kings tried and failed. Then Rama, with effortless grace, lifted the bow, strung
-        it, and broke it — the thunderous crack echoing across the three worlds. Sita placed the garland around Rama's
-        neck, and heaven itself rejoiced.</p>
+      <p class="scene-body">In the resplendent court of Mithila, King Janaka proclaimed the Swayamvara of his daughter Sita, born of the sacred earth. Only the warrior who could lift, string, and bend the immense, divine bow of Lord Shiva—the <em>Pinaka</em>—would win her hand in marriage.</p>
+      <p class="scene-body">Countless mighty kings and arrogant princes tried, but failed to even move the celestial weapon. Then, stepping forth with serene majesty, Prince Rama lifted the bow with absolute ease. As he strung it, the mighty bow snapped with a thunderous crack that echoed across the three worlds, trembling the very cosmos. With absolute devotion, Sita approached and placed the <em>varmala</em> (victory garland) around his neck, as the heavens showered flowers in joyous celebration.</p>
       <div class="scene-characters">
         <span class="char-tag gold">Sita — Daughter of Earth</span>
         <span class="char-tag">King Janaka</span>
@@ -408,10 +514,52 @@
   ══════════════════════════════════════ -->
   <section id="scene-3" class="scene scene-exile" data-chapter="Rama's Exile" aria-labelledby="s3-title">
     <div class="exile-sky" id="exile-sky"></div>
-    <div class="exile-palace-fade" id="exile-palace"></div>
+    <div class="exile-palace-fade" id="exile-palace">
+      <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax meet" style="position:absolute; inset:0; width:100%; height:100%">
+        <!-- Subtle sunset/dusk setting behind the fading palace -->
+        <defs>
+          <linearGradient id="exileSun" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ff7b00" stop-opacity="0.3" />
+            <stop offset="100%" stop-color="#4a0000" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <circle cx="200" cy="200" r="150" fill="url(#exileSun)" />
+        
+        <!-- Fading Ayodhya Silhouette -->
+        <g fill="#110502" opacity="0.4">
+          <ellipse cx="720" cy="300" rx="300" ry="10" />
+          <rect x="600" y="200" width="240" height="100" />
+          <polygon points="580,200 720,100 860,200" />
+          <rect x="500" y="250" width="80" height="50" />
+          <polygon points="490,250 540,180 590,250" />
+          <rect x="860" y="250" width="80" height="50" />
+          <polygon points="850,250 900,180 950,250" />
+          <rect x="700" y="100" width="40" height="80" />
+          <polygon points="695,100 720,40 745,100" />
+        </g>
+      </svg>
+    </div>
+    
     <div class="forest-emerge" id="forest-emerge">
       <svg viewBox="0 0 1440 500" class="forest-svg" preserveAspectRatio="xMidYMax meet">
-        <!-- Dense trees -->
+        <defs>
+           <linearGradient id="pathGradient" x1="0" y1="0" x2="0" y2="1">
+             <stop offset="0%" stop-color="#150a04" />
+             <stop offset="100%" stop-color="#3d2710" />
+           </linearGradient>
+        </defs>
+
+        <!-- Deep background trees (Darkest) -->
+        <g fill="#051005">
+          <polygon points="0,500 100,150 200,500" />
+          <polygon points="120,500 220,100 320,500" />
+          <polygon points="260,500 350,180 440,500" />
+          <polygon points="980,500 1080,120 1180,500" />
+          <polygon points="1120,500 1220,160 1320,500" />
+          <polygon points="1280,500 1380,110 1440,300 1440,500" />
+        </g>
+
+        <!-- Midground trees -->
         <g fill="#0a1f0a">
           <polygon points="100,500 160,200 220,500" />
           <polygon points="180,500 250,150 320,500" />
@@ -426,8 +574,20 @@
           <polygon points="1150,500 1220,170 1300,500" />
           <polygon points="1280,500 1350,200 1440,400 1440,500" />
         </g>
-        <!-- Lighter layer -->
-        <g fill="#0d280d" opacity="0.7">
+        
+        <!-- Foreground large trunks to add depth framing -->
+        <g fill="#050a05">
+           <!-- Massive tree left -->
+           <path d="M-20,500 Q20,300 -10,-50 L100,-50 Q110,200 80,500 Z" />
+           <path d="M60,100 Q150,150 250,50 L260,70 Q150,180 80,130 Z" /> <!-- Branch -->
+           
+           <!-- Massive tree right -->
+           <path d="M1460,500 Q1420,300 1450,-50 L1340,-50 Q1330,200 1360,500 Z" />
+           <path d="M1380,150 Q1300,180 1200,100 L1190,120 Q1300,210 1360,180 Z" /> <!-- Branch -->
+        </g>
+
+        <!-- Lighter layer for depth -->
+        <g fill="#0d280d" opacity="0.8">
           <polygon points="0,500 60,280 130,500" />
           <polygon points="230,500 290,230 360,500" />
           <polygon points="460,500 520,260 590,500" />
@@ -435,19 +595,30 @@
           <polygon points="930,500 990,270 1060,500" />
           <polygon points="1160,500 1220,250 1290,500" />
         </g>
-        <!-- Road path -->
-        <path d="M620,500 Q680,300 720,100" stroke="#2a1a08" stroke-width="40" fill="none" opacity="0.4" />
-        <path d="M620,500 Q680,300 720,100" stroke="#3d2710" stroke-width="20" fill="none" opacity="0.3" />
+
+        <!-- The dusty path leading out of Ayodhya -->
+        <path d="M580,500 Q680,300 720,150 L750,150 Q750,300 820,500 Z" fill="url(#pathGradient)" opacity="0.6" />
+        <path d="M620,500 Q680,300 720,150" stroke="#2a1a08" stroke-width="40" fill="none" opacity="0.4" />
+        <path d="M620,500 Q680,300 720,150" stroke="#3d2710" stroke-width="20" fill="none" opacity="0.3" />
       </svg>
     </div>
+    
     <div class="exile-road" id="exile-road">
       <div class="road-figures">
         <svg viewBox="0 0 400 200" class="figures-svg">
+          <!-- Footprints fading out -->
+          <g fill="#110502" opacity="0.15">
+             <ellipse cx="230" cy="180" rx="6" ry="3" transform="rotate(-15 230 180)" />
+             <ellipse cx="250" cy="165" rx="6" ry="3" transform="rotate(-10 250 165)" />
+             <ellipse cx="275" cy="190" rx="5" ry="2" transform="rotate(-20 275 190)" />
+             <ellipse cx="295" cy="170" rx="5" ry="2" transform="rotate(-15 295 170)" />
+          </g>
+
           <!-- Detailed Realistic Human Figures Walking -->
-          <!-- Detailed Realistic Human Figures Walking -->
-          <g fill="#1a0d05" opacity="0.85" id="exile-figures">
+          <g fill="#1a0d05" opacity="0.9" id="exile-figures">
             <!-- Rama (Leading) -->
-            <g id="fig-rama" transform="translate(150, 75)">
+            <g id="fig-rama" transform="translate(140, 75)">
+              <circle cx="2" cy="-5" r="16" fill="#f5b942" opacity="0.1" filter="blur(4px)" /> <!-- Divine Subtle Aura -->
               <!-- Bow held in hand -->
               <path d="M-10,-5 Q-20,20 -10,45" stroke="#1a0d05" stroke-width="2" fill="none" />
               <!-- Head (with hair bun) -->
@@ -460,7 +631,8 @@
             </g>
 
             <!-- Sita (Middle, close behind) -->
-            <g id="fig-sita" transform="translate(180, 80)">
+            <g id="fig-sita" transform="translate(175, 80)">
+              <circle cx="5" cy="0" r="14" fill="#f5b942" opacity="0.08" filter="blur(3px)" />
               <!-- Head (with hair down/bun) -->
               <circle cx="5" cy="-5" r="5" />
               <path d="M8,-5 Q12,2 8,10 Q4,5 2,-2 Z" />
@@ -471,14 +643,15 @@
               <path d="M8,5 Q15,15 10,25" stroke="#1a0d05" stroke-width="2.5" fill="none" />
             </g>
 
-            <!-- Lakshmana (Trailing, right behind Sita) -->
+            <!-- Lakshmana (Trailing, vigilantly watching behind/around) -->
             <g id="fig-lakshmana" transform="translate(210, 75)">
+              <circle cx="4" cy="-5" r="14" fill="#f5b942" opacity="0.05" filter="blur(3px)" />
               <!-- Bow on shoulder -->
               <path d="M12,-15 Q25,10 15,30" stroke="#1a0d05" stroke-width="2" fill="none" />
               <!-- Quiver on back -->
               <rect x="0" y="5" width="6" height="20" rx="2" transform="rotate(20)" />
               <line x1="2" y1="5" x2="-2" y2="-5" stroke="#1a0d05" stroke-width="1.5" />
-              <!-- Head (with hair bun) -->
+              <!-- Head (with hair bun looking slightly back) -->
               <path d="M3,-2 C-1,-2 -3,-8 1,-11 C5,-14 10,-11 6,-5 C9,-5 12,-1 12,3 C12,8 5,8 3,-2 Z" />
               <!-- Torso, draped cloth, and legs -->
               <path d="M5,4 C11,5 15,10 13,20 C11,35 16,45 16,55 L9,55 C7,45 4,35 6,25 L-1,55 L-7,55 C-1,40 -1,25 1,10 C-2,8 -3,5 5,4 Z" />
@@ -494,12 +667,8 @@
       <div class="scene-number">III</div>
       <h2 class="scene-title" id="s3-title">The Exile</h2>
       <div class="scene-divider"></div>
-      <p class="scene-body">Queen Kaikeyi, consumed by jealousy, called upon two ancient boons granted by Dasharatha.
-        Her demands were cruel: exile Rama to the forest for fourteen years, and crown her son Bharata as king.
-        Dasharatha, bound by his word, wept but could not refuse.</p>
-      <p class="scene-body">Without a word of resentment, Rama accepted his fate. Sita and Lakshmana refused to be
-        parted from him. Together they walked into the wilderness — the king's grief was so great, he died of a broken
-        heart soon after.</p>
+      <p class="scene-body">Bound by an oath, King Dasharatha yielded to Queen Kaikeyi’s cruel demands: the banishment of Rama to the untamed wilderness for fourteen years, and the coronation of Bharata in his stead. The opulent gates of Ayodhya closed, while the endless dark forest opened its jaws to swallow the prince of light.</p>
+      <p class="scene-body">Unyielding in their devotion, Sita and Lakshmana followed him into exile, exchanging silks for tree bark. Behind them, a kingdom wept. Ahead of them lay a path shrouded in thorns and prophecy.</p>
       <div class="scene-characters">
         <span class="char-tag red">Kaikeyi — The Scheming Queen</span>
         <span class="char-tag">Rama · Sita · Lakshmana</span>
@@ -521,39 +690,77 @@
               <stop offset="0%" stop-color="#2d5a1e" stop-opacity="0.4" />
               <stop offset="100%" stop-color="#030f03" stop-opacity="0" />
             </radialGradient>
+            <linearGradient id="treeTrunk" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#020802" />
+              <stop offset="20%" stop-color="#041204" />
+              <stop offset="80%" stop-color="#041204" />
+              <stop offset="100%" stop-color="#010501" />
+            </linearGradient>
+            <radialGradient id="hutGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f5b942" stop-opacity="0.6" />
+              <stop offset="100%" stop-color="#f5b942" stop-opacity="0" />
+            </radialGradient>
           </defs>
           <rect width="1440" height="600" fill="#020c02" />
           <rect width="1440" height="600" fill="url(#forestLight)" />
+          
+          <!-- Panchavati Hermitage Details in Deep Background -->
+          <g transform="translate(680, 480)" opacity="0.6">
+             <circle cx="50" cy="-20" r="100" fill="url(#hutGlow)" class="hut-ambient-glow" />
+             <polygon points="10,-60 50,-100 90,-60" fill="#151005" />
+             <rect x="20" y="-60" width="60" height="60" fill="#0d0a05" />
+             <rect x="40" y="-30" width="20" height="30" fill="#2a1608" /> <!-- Door -->
+             <circle cx="45" cy="-15" r="2" fill="#f5b942" class="hut-flame-anim" /> <!-- Little flame -->
+             <path d="M10,-60 Q50,-40 90,-60 L50,-100 Z" fill="#2a1e0f" /> <!-- Roof texture -->
+          </g>
+
           <!-- Deep trees -->
           <g opacity="0.9">
-            <g fill="#041004">
-              <polygon points="0,600 80,100 160,600" />
-              <polygon points="100,600 190,80 280,600" />
-              <polygon points="250,600 340,120 430,600" />
-              <polygon points="400,600 490,90 580,600" />
-              <polygon points="550,600 640,100 730,600" />
-              <polygon points="700,600 790,80 880,600" />
-              <polygon points="850,600 940,110 1030,600" />
-              <polygon points="1000,600 1090,90 1180,600" />
-              <polygon points="1150,600 1240,100 1330,600" />
-              <polygon points="1290,600 1370,120 1440,500 1440,600" />
+            <g fill="url(#treeTrunk)">
+              <!-- Huge foreground tree trunks acting as framing -->
+              <rect x="-20" y="-100" width="120" height="750" />
+              <path d="M100,200 Q150,250 250,150 L270,170 Q150,300 100,250 Z" fill="url(#treeTrunk)" /> <!-- Roots/Branches -->
+              <rect x="1350" y="-100" width="120" height="750" />
+              <path d="M1350,150 Q1250,200 1150,100 L1130,120 Q1250,250 1350,200 Z" fill="url(#treeTrunk)" />
+              
+              <!-- Regular trees -->
+              <polygon points="80,600 120,50 160,600" />
+              <polygon points="200,600 240,80 280,600" />
+              <polygon points="350,600 390,120 430,600" />
+              <polygon points="500,600 540,90 580,600" />
+              <polygon points="850,600 890,110 930,600" />
+              <polygon points="1000,600 1040,90 1080,600" />
+              <polygon points="1150,600 1190,100 1230,600" />
             </g>
-            <g fill="#061506" opacity="0.7">
-              <polygon points="50,600 120,180 190,600" />
-              <polygon points="200,600 270,160 340,600" />
-              <polygon points="370,600 440,150 510,600" />
-              <polygon points="540,600 610,170 680,600" />
-              <polygon points="720,600 790,160 860,600" />
-              <polygon points="890,600 960,150 1030,600" />
-              <polygon points="1060,600 1130,170 1200,600" />
-              <polygon points="1230,600 1300,180 1370,600" />
+            <g fill="#061506" opacity="0.8">
+              <!-- Canopy leaves overlapping -->
+              <circle cx="120" cy="150" r="100" />
+              <circle cx="240" cy="180" r="120" />
+              <circle cx="390" cy="220" r="110" />
+              <circle cx="540" cy="190" r="130" />
+              <circle cx="890" cy="210" r="140" />
+              <circle cx="1040" cy="190" r="120" />
+              <circle cx="1190" cy="200" r="110" />
             </g>
           </g>
-          <!-- Ground -->
+          
+          <!-- Wild Vines hanging down for depth -->
+          <g fill="none" stroke="#0a1a0a" stroke-width="4" stroke-linecap="round">
+             <path d="M390,220 Q400,350 380,450" opacity="0.6" />
+             <path d="M540,190 Q520,300 560,500" opacity="0.5" />
+             <path d="M890,210 Q910,350 880,480" opacity="0.5" />
+             <path d="M1040,190 Q1020,300 1050,420" opacity="0.6" />
+          </g>
+
+          <!-- Ground with subtle grass textures -->
           <rect x="0" y="540" width="1440" height="60" fill="#020a02" />
-          <!-- Light beams -->
-          <polygon points="580,0 560,300 640,300 620,0" fill="#4a8f2010" opacity="0.3" />
-          <polygon points="780,0 760,300 840,300 820,0" fill="#4a8f2010" opacity="0.3" />
+          <path d="M100,540 Q110,530 115,540 M200,540 Q205,525 210,540 M400,540 Q410,520 420,540" stroke="#0a2a0a" stroke-width="2" fill="none" />
+          <path d="M800,540 Q810,525 815,540 M1000,540 Q1005,530 1010,540 M1200,540 Q1210,520 1220,540" stroke="#0a2a0a" stroke-width="2" fill="none" />
+
+          <!-- Ethereal Light beams filtering through dense canopy -->
+          <polygon points="560,-50 480,540 640,540 680,-50" fill="#4a8f2010" opacity="0.4" />
+          <polygon points="880,-50 800,540 960,540 1000,-50" fill="#4a8f2010" opacity="0.3" />
+          <polygon points="200,-50 150,540 250,540 300,-50" fill="#4a8f2010" opacity="0.2" />
         </svg>
       </div>
     </div>
@@ -563,12 +770,8 @@
       <div class="scene-number">IV</div>
       <h2 class="scene-title" id="s4-title">Life in the<br>Forest</h2>
       <div class="scene-divider"></div>
-      <p class="scene-body">In the Dandaka forest, amid towering trees and sacred rivers, Rama, Sita, and Lakshmana
-        found a strange peace. They met sages engaged in deep meditation, learned from their wisdom, and protected them
-        from marauding demons.</p>
-      <p class="scene-body">They built a hermitage at Panchavati by the Godavari river. But peace in exile is fragile —
-        dark forces stirred in the shadows. The demoness Shurpanakha, sister of Ravana, encountered them and was
-        humiliated by Lakshmana. The seeds of catastrophe were sown.</p>
+      <p class="scene-body">Deep within the sprawling shadows of the Dandaka forest, Rama, Sita, and Lakshmana forged an unshakeable bond with the wilderness. They built a modest hermitage at Panchavati, beside the shimmering Godavari river. Among ancient, towering trees and glowing fireflies, they protected meditating ascetics from the terrifying demons that haunted the groves.</p>
+      <p class="scene-body">Yet, the tranquility of exile was not meant to last. The monstrous demoness Shurpanakha—sister to the cruel king Ravana—stumbled into their sacred grove. Smitten but spurned, she attacked Sita, leading Lakshmana to punish her severely. Enraged, she fled to Lanka, dragging the wheels of fate toward an inevitable war.</p>
       <div class="scene-characters">
         <span class="char-tag">Sages of the Forest</span>
         <span class="char-tag red">Shurpanakha</span>
@@ -920,6 +1123,83 @@
   ══════════════════════════════════════ -->
   <section id="scene-9" class="scene scene-fire" data-chapter="The Burning of Lanka" aria-labelledby="s9-title">
     <canvas id="fireCanvas" class="fire-canvas"></canvas>
+    
+    <!-- Burning City Background -->
+    <div class="lanka-city" id="lanka-city">
+      <svg viewBox="0 0 1440 600" class="lanka-svg" preserveAspectRatio="xMidYMax meet">
+        <defs>
+          <linearGradient id="fireGrad" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#ff0000" />
+            <stop offset="50%" stop-color="#ff8c00" />
+            <stop offset="100%" stop-color="#ffcc00" stop-opacity="0" />
+          </linearGradient>
+          <radialGradient id="burnGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ff4500" stop-opacity="0.6" />
+            <stop offset="100%" stop-color="#ff4500" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        
+        <!-- Background City Silhouette -->
+        <g fill="#1a0000" opacity="0.6">
+           <rect x="100" y="300" width="150" height="300" />
+           <polygon points="100,300 175,200 250,300" />
+           
+           <rect x="300" y="250" width="200" height="350" />
+           <polygon points="280,250 400,150 520,250" />
+           
+           <rect x="1000" y="280" width="180" height="320" />
+           <ellipse cx="1090" cy="280" rx="90" ry="60" />
+           
+           <rect x="1250" y="350" width="120" height="250" />
+           <polygon points="1250,350 1310,280 1370,350" />
+        </g>
+        
+        <!-- Midground Golden Palaces (Tarnished by fire) -->
+        <g fill="#2d0a00" stroke="#8b2500" stroke-width="2">
+           <rect x="550" y="200" width="350" height="400" />
+           <!-- Great Dome of Lanka -->
+           <path d="M550,200 Q725,0 900,200 Z" fill="#3a0c00" />
+           <rect x="710" y="80" width="30" height="120" fill="#1a0000" /> <!-- Spire -->
+           
+           <rect x="80" y="400" width="250" height="200" />
+           <rect x="1100" y="380" width="300" height="220" />
+        </g>
+
+        <!-- Dynamic Fire on Buildings -->
+        <g class="city-fires">
+           <path d="M120,380 Q150,300 180,380 Q210,320 240,390" fill="none" stroke="url(#fireGrad)" stroke-width="40" opacity="0.8" class="flame-anim" />
+           <path d="M580,250 Q650,150 720,250 Q780,100 850,230" fill="none" stroke="url(#fireGrad)" stroke-width="60" opacity="0.85" class="flame-anim-2" />
+           <path d="M1150,360 Q1200,250 1250,360 Q1300,280 1350,370" fill="none" stroke="url(#fireGrad)" stroke-width="50" opacity="0.8" class="flame-anim" />
+        </g>
+        
+        <!-- Overlaid Glowing embers/fire light -->
+        <circle cx="725" cy="200" r="150" fill="url(#burnGlow)" class="pulse-glow" />
+        <circle cx="200" cy="350" r="100" fill="url(#burnGlow)" class="pulse-glow-2" />
+        <circle cx="1250" cy="320" r="120" fill="url(#burnGlow)" class="pulse-glow" />
+      </svg>
+    </div>
+
+    <!-- Hanuman leaping across roofs with burning tail -->
+    <div class="hanuman-arsonist" id="hanuman-arsonist">
+      <svg viewBox="0 0 150 150">
+        <!-- Hanuman silhouette -->
+        <g fill="#000" filter="drop-shadow(0 0 15px #ff4500)">
+          <!-- Body -->
+          <path d="M50,70 Q70,50 90,70 L80,100 L60,100 Z" />
+          <circle cx="75" cy="45" r="15" />
+          <!-- Leap pose arms and legs -->
+          <rect x="35" y="60" width="15" height="40" rx="5" transform="rotate(55 42 80)" />
+          <rect x="85" y="60" width="15" height="40" rx="5" transform="rotate(-40 92 80)" />
+          <rect x="50" y="90" width="15" height="40" rx="5" transform="rotate(-30 55 90)" />
+          <rect x="75" y="90" width="15" height="40" rx="5" transform="rotate(30 80 90)" />
+          <!-- Infinite Burning Tail looping and trailing behind -->
+          <path d="M85,95 Q140,130 145,50 Q140,-10 80,10 Q40,20 -10,10" fill="none" stroke="#000" stroke-width="7" stroke-linecap="round" />
+          <path d="M85,95 Q140,130 145,50 Q140,-10 80,10 Q40,20 -10,10" fill="none" stroke="#ff4500" stroke-width="14" filter="blur(4px)" class="tail-fire" />
+          <path d="M85,95 Q140,130 145,50 Q140,-10 80,10 Q40,20 -10,10" fill="none" stroke="#ffcc00" stroke-width="5" filter="blur(1px)" />
+        </g>
+      </svg>
+    </div>
+
     <div class="ember-container" id="embers"></div>
     <div class="smoke-layer" id="smoke1"></div>
     <div class="smoke-layer" id="smoke2"></div>
@@ -955,56 +1235,189 @@
           </radialGradient>
         </defs>
         <rect width="1440" height="400" fill="url(#battleGlow)" />
-        <!-- Army silhouettes -->
-        <g fill="#0a0305" id="battle-silhouette-group">
-          <!-- Monkey army left -->
-          <g opacity="0.85">
-            <circle cx="80" cy="300" r="10" />
-            <rect x="74" y="310" width="12" height="30" />
-            <circle cx="130" cy="295" r="10" />
-            <rect x="124" y="305" width="12" height="30" />
-            <circle cx="180" cy="300" r="10" />
-            <rect x="174" y="310" width="12" height="30" />
-            <circle cx="230" cy="295" r="10" />
-            <rect x="224" y="305" width="12" height="30" />
-            <circle cx="280" cy="300" r="10" />
-            <rect x="274" y="310" width="12" height="30" />
-            <circle cx="330" cy="295" r="10" />
-            <rect x="324" y="305" width="12" height="30" />
-            <!-- Rama at center-left with bow -->
-            <circle cx="450" cy="270" r="15" />
-            <rect x="442" y="285" width="16" height="50" />
-            <line x1="430" y1="260" x2="480" y2="240" stroke="#0a0305" stroke-width="3" />
-            <!-- Lakshmana beside -->
-            <circle cx="490" cy="275" r="13" />
-            <rect x="483" y="288" width="14" height="45" />
-          </g>
-          <!-- Demon army right -->
-          <g fill="#1a0005" opacity="0.85">
-            <circle cx="900" cy="295" r="12" />
-            <rect x="892" y="307" width="16" height="33" />
-            <circle cx="960" cy="300" r="12" />
-            <rect x="952" y="312" width="16" height="33" />
-            <circle cx="1020" cy="295" r="12" />
-            <rect x="1012" y="307" width="16" height="33" />
-            <circle cx="1080" cy="300" r="12" />
-            <rect x="1072" y="312" width="16" height="33" />
-            <circle cx="1140" cy="295" r="12" />
-            <rect x="1132" y="307" width="16" height="33" />
-            <circle cx="1200" cy="300" r="12" />
-            <rect x="1192" y="312" width="16" height="33" />
-            <circle cx="1260" cy="295" r="12" />
-            <rect x="1252" y="307" width="16" height="33" />
-            <circle cx="1320" cy="300" r="12" />
-            <rect x="1312" y="312" width="16" height="33" />
-            <!-- Ravana commanding - large figure -->
-            <g transform="translate(820,230)">
-              <circle cx="0" cy="-15" r="12" />
-              <circle cx="18" cy="-20" r="10" />
-              <circle cx="-18" cy="-20" r="10" />
-              <rect x="-15" y="0" width="30" height="50" rx="5" />
-              <polygon points="-5,-40 0,-60 5,-40 10,-55 15,-40 20,-30 -20,-30 -15,-55" fill="#1a0005" />
+        <!-- Detailed Army silhouettes -->
+        <g id="battle-silhouette-group">
+          <!-- Monkey army (Vanaras) charging left to right -->
+          <g fill="#c47a1e" filter="brightness(0.5) sepia(1)" class="vanara-army">
+            <!-- Frontline Warriors with Gadas (Maces) and Boulders -->
+            <g transform="translate(150, 260)" class="warrior-charge-1">
+              <!-- Hanuman at the front -->
+              <circle cx="0" cy="0" r="14" />
+              <rect x="-10" y="15" width="20" height="35" rx="5" />
+              <!-- Mace swinging -->
+              <g class="weapon-swing">
+                <rect x="0" y="20" width="40" height="6" rx="3" fill="#8b5e0a" />
+                <circle cx="45" cy="23" r="10" fill="#d4a017" />
+              </g>
+              <rect x="-5" y="50" width="10" height="25" class="leg-run-1" />
+              <rect x="5" y="50" width="10" height="25" class="leg-run-2" />
+              <path d="M-10,30 Q-30,40 -20,60" stroke="#c47a1e" stroke-width="4" fill="none" class="tail-wag-1" />
             </g>
+
+            <g transform="translate(80, 275)" class="warrior-charge-2">
+               <!-- Angada throwing boulder -->
+               <circle cx="0" cy="0" r="12" />
+               <rect x="-8" y="12" width="16" height="30" rx="4" />
+               <!-- Boulder held high -->
+               <circle cx="20" cy="-10" r="15" fill="#555" class="boulder-throw" />
+               <path d="M5,15 Q20,-5 20,-10" stroke="#c47a1e" stroke-width="6" fill="none" class="arm-throw" />
+               <rect x="-8" y="42" width="8" height="20" class="leg-run-2" />
+               <rect x="4" y="42" width="8" height="20" class="leg-run-1" />
+            </g>
+
+            <g transform="translate(30, 265)" class="warrior-charge-3">
+               <circle cx="0" cy="0" r="11" />
+               <rect x="-8" y="12" width="16" height="28" rx="4" />
+               <path d="M-8,15 Q15,10 25,25" stroke="#c47a1e" stroke-width="5" fill="none" />
+               <rect x="-8" y="40" width="8" height="20" class="leg-run-1" />
+               <rect x="4" y="40" width="8" height="20" class="leg-run-2" />
+            </g>
+
+            <!-- Background Vanaras -->
+            <g transform="translate(100, 240) scale(0.8)" class="warrior-charge-2 opacity-70">
+               <circle cx="0" cy="0" r="10" />
+               <rect x="-8" y="10" width="16" height="25" rx="3" />
+               <path d="M0,15 L20,0" stroke="#8b5e0a" stroke-width="3" />
+            </g>
+            <g transform="translate(200, 250) scale(0.85)" class="warrior-charge-1 opacity-70">
+               <circle cx="0" cy="0" r="11" />
+               <rect x="-8" y="10" width="16" height="25" rx="3" />
+               <circle cx="15" cy="-5" r="12" fill="#555" />
+            </g>
+          </g>
+
+          <!-- The Divine Princes (Rama & Lakshmana) -->
+          <g class="divine-archers">
+            <g transform="translate(350, 250)">
+              <!-- Rama -->
+              <circle cx="0" cy="0" r="15" fill="#050208" />
+              <!-- Glowing aura -->
+              <circle cx="0" cy="0" r="25" fill="#f5b942" opacity="0.3" class="hero-aura" />
+              <rect x="-10" y="15" width="20" height="40" rx="5" fill="#050208" />
+              <!-- Bow drawn back -->
+              <path d="M10,0 Q30,25 10,50" stroke="#f5b942" stroke-width="4" fill="none" />
+              <line x1="10" y1="0" x2="10" y2="50" stroke="#fff" stroke-width="1" opacity="0.5" class="bowstring-anim" />
+              <line x1="-15" y1="25" x2="10" y2="25" stroke="#050208" stroke-width="4" class="arm-pulling" /> <!-- arm pulling -->
+              <line x1="-10" y1="25" x2="15" y2="25" stroke="#f5b942" stroke-width="2" class="arrow-ready" /> <!-- arrow -->
+              <!-- Glowing Arrowhead -->
+              <polygon points="15,22 20,25 15,28" fill="#fff" class="arrow-glow arrow-ready" />
+              
+              <rect x="-8" y="55" width="8" height="25" fill="#050208" />
+              <rect x="4" y="55" width="8" height="25" fill="#050208" />
+            </g>
+            <g transform="translate(280, 260)">
+              <!-- Lakshmana -->
+              <circle cx="0" cy="0" r="14" fill="#050208" />
+              <circle cx="0" cy="0" r="22" fill="#f5b942" opacity="0.2" class="hero-aura-alt" />
+              <rect x="-9" y="14" width="18" height="38" rx="4" fill="#050208" />
+              <!-- Bow shooting up -->
+              <path d="M15,-10 Q35,5 20,30" stroke="#f5b942" stroke-width="3" fill="none" />
+              <line x1="15" y1="-10" x2="20" y2="30" stroke="#fff" stroke-width="1" opacity="0.4" class="bowstring-anim-alt" />
+              <line x1="-10" y1="5" x2="25" y2="-5" stroke="#f5b942" stroke-width="2" class="arrow-ready-alt" /> <!-- arrow slightly up -->
+              <polygon points="25,-8 30,-6 25,-2" fill="#fff" class="arrow-glow arrow-ready-alt" />
+              <rect x="-7" y="52" width="7" height="25" fill="#050208" transform="rotate(10)" />
+              <rect x="5" y="52" width="7" height="25" fill="#050208" transform="rotate(-10)" />
+            </g>
+          </g>
+
+          <!-- Demon army (Rakshasas) charging right to left -->
+          <g fill="#1a0005" class="rakshasa-army">
+            <g transform="translate(1000, 250)" class="warrior-charge-rev-1">
+              <!-- Giant Rakshasa -->
+              <circle cx="0" cy="0" r="18" />
+              <path d="M-10,-10 L-15,-25 L-5,-15 Z" fill="#1a0005" /> <!-- Horns -->
+              <path d="M10,-10 L15,-25 L5,-15 Z" fill="#1a0005" />
+              <rect x="-15" y="20" width="30" height="45" rx="5" />
+              <!-- Trident swinging -->
+              <g class="weapon-swing-rev">
+                <rect x="-40" y="30" width="40" height="5" fill="#400" />
+                <path d="M-50,20 Q-40,20 -40,32 Q-40,45 -50,45" stroke="#800" stroke-width="3" fill="none" />
+                <line x1="-40" y1="32" x2="-60" y2="32" stroke="#800" stroke-width="4" filter="drop-shadow(0 0 5px #f00)" />
+              </g>
+              <rect x="-10" y="65" width="12" height="30" class="leg-run-1" />
+              <rect x="5" y="65" width="12" height="30" class="leg-run-2" />
+            </g>
+
+            <g transform="translate(1120, 240)" class="warrior-charge-rev-2">
+              <circle cx="0" cy="0" r="15" />
+              <rect x="-12" y="15" width="24" height="40" rx="4" />
+              <g class="weapon-thrust">
+                 <rect x="-50" y="25" width="60" height="4" fill="#300" />
+                 <polygon points="-60,27 -50,22 -50,32" fill="#800" />
+              </g>
+              <rect x="-8" y="55" width="10" height="25" class="leg-run-2" />
+              <rect x="4" y="55" width="10" height="25" class="leg-run-1" />
+            </g>
+            
+            <g transform="translate(1200, 260)" class="warrior-charge-rev-3">
+              <circle cx="0" cy="0" r="16" />
+               <path d="M0,0 L0,-15" stroke="#1a0005" stroke-width="4" />
+              <rect x="-14" y="16" width="28" height="42" rx="4" />
+              <!-- Sword held high -->
+              <path d="M0,25 Q-15,-10 -30,-20" stroke="#1a0005" stroke-width="6" fill="none" />
+              <path d="M-30,-20 L-45,-40 L-20,-25 Z" fill="#500" class="weapon-glow-red" />
+              <rect x="-10" y="58" width="12" height="28" class="leg-run-1" />
+              <rect x="4" y="58" width="12" height="28" class="leg-run-2" />
+            </g>
+
+            <g transform="translate(1300, 230)" class="warrior-charge-rev-1 opacity-70">
+              <circle cx="0" cy="0" r="18" />
+              <rect x="-16" y="18" width="32" height="45" rx="5" />
+            </g>
+            <g transform="translate(900, 235) scale(0.8)" class="warrior-charge-rev-2 opacity-70">
+              <circle cx="0" cy="0" r="15" />
+              <rect x="-12" y="15" width="24" height="40" rx="4" />
+              <rect x="-40" y="25" width="50" height="4" fill="#300" />
+            </g>
+            <g transform="translate(1050, 270) scale(0.9)" class="warrior-charge-rev-3 opacity-90">
+              <circle cx="0" cy="0" r="14" />
+              <rect x="-10" y="14" width="20" height="35" rx="4" />
+              <rect x="-30" y="20" width="30" height="6" fill="#400" />
+            </g>
+
+            <!-- Ravana Commanding from the back (right) -->
+            <g transform="translate(1350, 180)">
+              <!-- Demonic Aura -->
+              <circle cx="0" cy="30" r="70" fill="#8b0000" opacity="0.3" class="ravana-aura" />
+              <g class="ravana-command-anim">
+                <!-- 10 Heads Suggestion -->
+                <circle cx="0" cy="-15" r="14" fill="#0d0002" />
+                <circle cx="-20" cy="-12" r="12" fill="#0d0002" />
+                <circle cx="20" cy="-12" r="12" fill="#0d0002" />
+                <circle cx="-38" cy="-8" r="10" fill="#0d0002" />
+                <circle cx="38" cy="-8" r="10" fill="#0d0002" />
+                <circle cx="-52" cy="-4" r="8" fill="#0d0002" />
+                <circle cx="52" cy="-4" r="8" fill="#0d0002" />
+                
+                <rect x="-25" y="0" width="50" height="80" rx="8" fill="#0d0002" />
+                <polygon points="0,-45 -12,-15 12,-15" fill="#8b0000" /> <!-- Main Crown -->
+                <polygon points="-20,-35 -30,-12 -10,-12" fill="#500000" />
+                <polygon points="20,-35 10,-12 30,-12" fill="#500000" />
+                
+                <!-- Multiple Arms -->
+                <path d="M-25,20 Q-60,5 -80,-10" stroke="#0d0002" stroke-width="8" fill="none" class="ravana-arm-anim-1" />
+                <path d="M-25,35 Q-70,30 -90,20" stroke="#0d0002" stroke-width="8" fill="none" class="ravana-arm-anim-2" />
+                <path d="M-25,50 Q-60,60 -80,80" stroke="#0d0002" stroke-width="8" fill="none" class="ravana-arm-anim-3" />
+                
+                <path d="M25,20 Q60,5 80,-10" stroke="#0d0002" stroke-width="8" fill="none" class="ravana-arm-anim-1" />
+                <path d="M25,35 Q70,30 90,20" stroke="#0d0002" stroke-width="8" fill="none" class="ravana-arm-anim-2" />
+                <path d="M25,50 Q60,60 80,80" stroke="#0d0002" stroke-width="8" fill="none" class="ravana-arm-anim-3" />
+
+                <!-- Giant Sword/Chandrahas -->
+                <path d="M-80,-10 L-100,-60 L-70,-20 Z" fill="#800" class="weapon-glow-red weapon-swing-rev" />
+              </g>
+            </g>
+          </g>
+          
+          <!-- Mid-air clashes (magic arrows vs demonic energy) -->
+          <g class="magic-clashes">
+            <ellipse cx="500" cy="230" rx="40" ry="10" fill="#f5b942" filter="blur(6px)" class="clash-flash" />
+            <circle cx="500" cy="230" r="10" fill="#fff" class="clash-core" />
+            
+            <ellipse cx="600" cy="180" rx="50" ry="15" fill="#8b0000" filter="blur(8px)" class="clash-flash-demonic" />
+            <circle cx="600" cy="180" r="12" fill="#ff4500" class="clash-core" />
+            
+            <ellipse cx="550" cy="280" rx="35" ry="8" fill="#f5b942" filter="blur(5px)" class="clash-flash" />
           </g>
         </g>
         <!-- Ground -->
