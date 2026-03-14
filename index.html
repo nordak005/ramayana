@@ -168,39 +168,127 @@
     </div>
     <div class="parallax-layer layer-mountains" id="s1-mountains">
       <svg class="mountain-svg" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax meet">
-        <polygon points="0,400 200,100 400,400" fill="#2d1b0e" opacity="0.5" />
-        <polygon points="150,400 380,60 620,400" fill="#3d2310" opacity="0.6" />
-        <polygon points="500,400 720,80 950,400" fill="#2a1608" opacity="0.55" />
-        <polygon points="750,400 1000,50 1250,400" fill="#3d2310" opacity="0.6" />
-        <polygon points="1050,400 1280,90 1440,250 1440,400" fill="#2d1b0e" opacity="0.5" />
+        <!-- Back layer mountains -->
+        <polygon points="0,400 150,80 300,400" fill="#1a0d05" opacity="0.6" />
+        <polygon points="200,400 450,40 700,400" fill="#2d1b0e" opacity="0.4" />
+        <polygon points="550,400 850,20 1150,400" fill="#1a0d05" opacity="0.5" />
+        <polygon points="900,400 1200,60 1440,300 1440,400" fill="#2d1b0e" opacity="0.4" />
+        
+        <!-- Mid layer mountains -->
+        <polygon points="0,400 200,100 400,400" fill="#2d1b0e" opacity="0.7" />
+        <polygon points="150,400 380,60 620,400" fill="#3d2310" opacity="0.8" />
+        <polygon points="500,400 720,80 950,400" fill="#2a1608" opacity="0.75" />
+        <polygon points="750,400 1000,50 1250,400" fill="#3d2310" opacity="0.8" />
+        <polygon points="1050,400 1280,90 1440,250 1440,400" fill="#2d1b0e" opacity="0.7" />
       </svg>
     </div>
     <div class="parallax-layer layer-palace" id="s1-palace">
       <svg class="palace-svg" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax meet">
-        <!-- Palace spires -->
-        <g fill="#1a0d05">
-          <rect x="580" y="80" width="8" height="300" />
-          <polygon points="580,80 584,20 588,80" />
-          <rect x="680" y="50" width="12" height="330" />
-          <polygon points="680,50 686,0 692,50" />
-          <rect x="760" y="70" width="8" height="310" />
-          <polygon points="760,70 764,15 768,70" />
-          <rect x="840" y="60" width="10" height="320" />
-          <polygon points="840,60 845,5 850,60" />
-          <rect x="500" y="120" width="6" height="260" />
-          <polygon points="500,120 503,70 506,120" />
+        <!-- Far background domes -->
+        <g fill="#110702" opacity="0.6">
+          <ellipse cx="450" cy="180" rx="40" ry="30" />
+          <polygon points="410,180 450,120 490,180" />
+          <ellipse cx="990" cy="180" rx="40" ry="30" />
+          <polygon points="950,180 990,120 1030,180" />
         </g>
-        <!-- Palace walls -->
-        <rect x="450" y="200" width="540" height="180" fill="#1a0d05" opacity="0.9" />
-        <rect x="500" y="180" width="440" height="40" fill="#251508" opacity="0.9" />
-        <!-- Arched windows glow -->
-        <ellipse cx="560" cy="260" rx="18" ry="25" fill="#f5b94240" />
-        <ellipse cx="640" cy="260" rx="18" ry="25" fill="#f5b94240" />
-        <ellipse cx="720" cy="260" rx="18" ry="25" fill="#f5b94240" />
-        <ellipse cx="800" cy="260" rx="18" ry="25" fill="#f5b94240" />
-        <ellipse cx="880" cy="260" rx="18" ry="25" fill="#f5b94240" />
-        <!-- Ground -->
-        <rect x="0" y="370" width="1440" height="130" fill="#0f0705" />
+        
+        <!-- Palace spires, flags, and towers -->
+        <g fill="#1a0d05">
+          <!-- Left side minor spires -->
+          <rect x="420" y="100" width="12" height="280" />
+          <polygon points="418,100 426,30 434,100" />
+          <path d="M426,30 Q445,25 445,15 L426,20Z" fill="#8b0000" opacity="0.9" /> <!-- Flag -->
+          <circle cx="426" cy="30" r="2.5" fill="#f5b942" />
+          
+          <rect x="500" y="120" width="12" height="260" />
+          <polygon points="498,120 506,50 514,120" />
+          <path d="M506,50 Q525,45 525,35 L506,40Z" fill="#d4a017" opacity="0.9" /> <!-- Flag -->
+          <circle cx="506" cy="50" r="2.5" fill="#f5b942" />
+          
+          <!-- Central majestic spires -->
+          <rect x="580" y="80" width="16" height="300" />
+          <polygon points="576,80 588,10 600,80" />
+          <path d="M588,10 Q610,5 610,-5 L588,0Z" fill="#ff8c00" /> <!-- Prominent Flag -->
+          <circle cx="588" cy="10" r="3.5" fill="#f5b942" /> <!-- Spire tip -->
+          
+          <rect x="680" y="40" width="24" height="340" />
+          <polygon points="674,40 692,-20 710,40" />
+          <path d="M692,-20 Q720,-25 720,-35 L692,-30Z" fill="#d4a017" /> <!-- Top Prominent Flag -->
+          <circle cx="692" cy="-20" r="4.5" fill="#f5b942" />
+          
+          <rect x="760" y="70" width="18" height="310" />
+          <polygon points="756,70 769,10 782,70" />
+          <path d="M769,10 Q790,5 790,-5 L769,0Z" fill="#ff8c00" /> <!-- New Flag -->
+          <circle cx="769" cy="10" r="3.5" fill="#f5b942" />
+          
+          <rect x="840" y="60" width="16" height="320" />
+          <polygon points="836,60 848,0 860,60" />
+          <path d="M848,0 Q870,-5 870,-15 L848,-10Z" fill="#8b0000" /> <!-- Prominent Flag -->
+          <circle cx="848" cy="0" r="3.5" fill="#f5b942" />
+          
+          <!-- Right side minor spires -->
+          <rect x="920" y="110" width="12" height="270" />
+          <polygon points="918,110 926,40 934,110" />
+          <path d="M926,40 Q945,35 945,25 L926,30Z" fill="#d4a017" opacity="0.9" /> <!-- New Flag -->
+          <circle cx="926" cy="40" r="2.5" fill="#f5b942" />
+          
+          <rect x="1000" y="130" width="10" height="250" />
+          <polygon points="998,130 1005,70 1012,130" />
+          <path d="M1005,70 Q1020,65 1020,55 L1005,60Z" fill="#8b0000" opacity="0.9" /> <!-- New Flag -->
+          <circle cx="1005" cy="70" r="2.5" fill="#f5b942" />
+        </g>
+        
+        <!-- Multi-tiered Palace Base & Walls -->
+        <rect x="350" y="240" width="740" height="140" fill="#150a04" opacity="0.8" /> <!-- Back tier -->
+        <rect x="400" y="200" width="640" height="180" fill="#1a0d05" opacity="0.95" /> <!-- Middle tier -->
+        <rect x="420" y="180" width="600" height="20" fill="#251508" opacity="0.95" /> <!-- Middle cornice -->
+        <rect x="450" y="220" width="540" height="160" fill="#201108" opacity="1" /> <!-- Front tier -->
+        <rect x="440" y="210" width="560" height="15" fill="#301b0d" opacity="1" /> <!-- Front cornice -->
+        <rect x="430" y="280" width="580" height="10" fill="#251508" opacity="0.8" /> <!-- Front trim layer -->
+        
+        <!-- Main Gate & Central Arch -->
+        <path d="M670,380 L670,280 Q720,230 770,280 L770,380 Z" fill="#0c0604" />
+        <path d="M685,380 L685,290 Q720,250 755,290 L755,380 Z" fill="#080402" />
+        
+        <!-- Detailed arched windows glowing with life -->
+        <g fill="#f5b94230">
+          <path d="M500,260 L500,240 Q510,220 520,240 L520,260 Z" />
+          <path d="M550,260 L550,235 Q565,210 580,235 L580,260 Z" fill="#f5b94250" />
+          <path d="M610,260 L610,240 Q620,220 630,240 L630,260 Z" />
+          
+          <path d="M810,260 L810,240 Q820,220 830,240 L830,260 Z" />
+          <path d="M860,260 L860,235 Q875,210 890,235 L890,260 Z" fill="#f5b94250" />
+          <path d="M920,260 L920,240 Q930,220 940,240 L940,260 Z" />
+        </g>
+        
+        <!-- Hanging lamps from arches -->
+        <g fill="#f5b942" opacity="0.8">
+          <circle cx="565" cy="245" r="3" />
+          <rect x="564" y="235" width="2" height="7" fill="#8b5a0a" />
+          <circle cx="875" cy="245" r="3" />
+          <rect x="874" y="235" width="2" height="7" fill="#8b5a0a" />
+          <circle cx="720" cy="275" r="5" /> <!-- Main gate lamp -->
+        </g>
+
+        <!-- Lower level glowing windows -->
+        <g fill="#f5b94220">
+          <rect x="480" y="320" width="15" height="25" rx="5" />
+          <rect x="530" y="320" width="15" height="25" rx="5" />
+          <rect x="580" y="320" width="15" height="25" rx="5" />
+          <rect x="630" y="320" width="15" height="25" rx="5" />
+          
+          <rect x="795" y="320" width="15" height="25" rx="5" />
+          <rect x="845" y="320" width="15" height="25" rx="5" />
+          <rect x="895" y="320" width="15" height="25" rx="5" />
+          <rect x="945" y="320" width="15" height="25" rx="5" />
+        </g>
+
+        <!-- Courtyard Steps -->
+        <rect x="630" y="370" width="180" height="5" fill="#1f110a" />
+        <rect x="610" y="375" width="220" height="5" fill="#150b06" />
+
+        <!-- Ground base -->
+        <rect x="0" y="380" width="1440" height="120" fill="#0f0705" />
       </svg>
       <div class="palace-glow" id="palace-glow"></div>
     </div>
@@ -259,8 +347,29 @@
         <rect x="660" y="260" width="120" height="40" rx="6" fill="#2a1608" />
         <!-- The Bow of Shiva -->
         <g id="shiva-bow" transform="translate(720,200)">
+          <!-- Bow body -->
           <path d="M-60,60 Q0,-40 60,60" stroke="#d4af37" stroke-width="8" fill="none" stroke-linecap="round" />
+          <path d="M-55,55 Q0,-35 55,55" stroke="#fff8d0" stroke-width="2" fill="none" opacity="0.6" /> <!-- Highlight -->
+          <!-- Bow string -->
           <line x1="-60" y1="60" x2="60" y2="60" stroke="#c8960c" stroke-width="3" stroke-dasharray="4,3" />
+          <!-- Royal Arrow resting on bow -->
+          <g id="shiva-arrow" transform="translate(0, 50)">
+            <!-- Arrow shadow/glow -->
+            <line x1="-40" y1="0" x2="55" y2="0" stroke="#f5b942" stroke-width="6" opacity="0.2" filter="blur(2px)" />
+            <!-- Shaft -->
+            <line x1="-40" y1="0" x2="40" y2="0" stroke="#f5b942" stroke-width="3" />
+            <line x1="-40" y1="-1" x2="40" y2="-1" stroke="#fff8d0" stroke-width="1" /> <!-- Shaft highlight -->
+            <!-- Golden Feathers (Fletching) -->
+            <path d="M-40,0 L-55,-6 L-45,0 L-55,6 Z" fill="#c47a1e" />
+            <path d="M-42,0 L-50,-3 L-45,0 L-50,3 Z" fill="#ffd700" />
+            <line x1="-40" y1="0" x2="-55" y2="0" stroke="#8b5a0a" stroke-width="1" />
+            <!-- Ornate Arrowhead -->
+            <path d="M40,-4 L55,0 L40,4 Z" fill="#fff8d0" />
+            <path d="M42,-2 L50,0 L42,2 Z" fill="#f5b942" />
+            <!-- Glowing tip -->
+            <circle cx="55" cy="0" r="2.5" fill="#ffffff" />
+            <circle cx="55" cy="0" r="6" fill="#f5b942" opacity="0.6" filter="blur(1px)" />
+          </g>
         </g>
         <!-- Bow glow -->
         <ellipse cx="720" cy="270" rx="80" ry="40" fill="#f5b94220" id="bow-glow-svg" />
@@ -334,19 +443,49 @@
     <div class="exile-road" id="exile-road">
       <div class="road-figures">
         <svg viewBox="0 0 400 200" class="figures-svg">
-          <!-- Simplified figures walking -->
-          <g fill="#1a0d05" opacity="0.8" id="exile-figures">
-            <!-- Rama -->
-            <circle cx="160" cy="80" r="12" />
-            <rect x="154" y="92" width="12" height="40" />
-            <line x1="154" y1="100" x2="135" y2="120" stroke="#1a0d05" stroke-width="4" />
-            <line x1="166" y1="100" x2="182" y2="125" stroke="#1a0d05" stroke-width="4" />
-            <!-- Sita -->
-            <circle cx="200" cy="84" r="10" />
-            <rect x="194" y="94" width="10" height="35" />
-            <!-- Lakshmana -->
-            <circle cx="238" cy="80" r="12" />
-            <rect x="232" y="92" width="12" height="40" />
+          <!-- Detailed Realistic Human Figures Walking -->
+          <!-- Detailed Realistic Human Figures Walking -->
+          <g fill="#1a0d05" opacity="0.85" id="exile-figures">
+            <!-- Rama (Leading) -->
+            <g id="fig-rama" transform="translate(150, 75)">
+              <!-- Bow held in hand -->
+              <path d="M-10,-5 Q-20,20 -10,45" stroke="#1a0d05" stroke-width="2" fill="none" />
+              <!-- Head (with hair bun) -->
+              <path d="M3,-2 C-1,-2 -3,-8 1,-11 C5,-14 10,-11 6,-5 C9,-5 12,-1 12,3 C12,8 5,8 3,-2 Z" />
+              <!-- Torso, draped cloth, and legs -->
+              <path d="M5,4 C10,5 14,10 12,20 C10,35 15,45 15,55 L8,55 C6,45 3,35 5,25 L-2,55 L-8,55 C-2,40 -2,25 0,10 C-3,8 -4,5 5,4 Z" />
+              <!-- Arms -->
+              <path d="M2,10 Q-5,15 -8,25 Q-6,30 -2,25" />
+              <path d="M10,12 Q18,20 15,30 Q12,35 8,30" />
+            </g>
+
+            <!-- Sita (Middle, close behind) -->
+            <g id="fig-sita" transform="translate(180, 80)">
+              <!-- Head (with hair down/bun) -->
+              <circle cx="5" cy="-5" r="5" />
+              <path d="M8,-5 Q12,2 8,10 Q4,5 2,-2 Z" />
+              <!-- Sari drape and flowing dress -->
+              <path d="M5,0 C12,5 14,15 10,30 C15,40 18,50 14,55 L-2,55 C-5,45 -8,30 -2,15 C-5,10 -2,5 5,0 Z" />
+              <path d="M5,10 Q-5,25 -2,40 Q-8,45 -10,30 Q-8,15 2,5 Z" opacity="0.8" /> <!-- Sari pallu flowing back -->
+              <!-- Arms tucked slightly -->
+              <path d="M8,5 Q15,15 10,25" stroke="#1a0d05" stroke-width="2.5" fill="none" />
+            </g>
+
+            <!-- Lakshmana (Trailing, right behind Sita) -->
+            <g id="fig-lakshmana" transform="translate(210, 75)">
+              <!-- Bow on shoulder -->
+              <path d="M12,-15 Q25,10 15,30" stroke="#1a0d05" stroke-width="2" fill="none" />
+              <!-- Quiver on back -->
+              <rect x="0" y="5" width="6" height="20" rx="2" transform="rotate(20)" />
+              <line x1="2" y1="5" x2="-2" y2="-5" stroke="#1a0d05" stroke-width="1.5" />
+              <!-- Head (with hair bun) -->
+              <path d="M3,-2 C-1,-2 -3,-8 1,-11 C5,-14 10,-11 6,-5 C9,-5 12,-1 12,3 C12,8 5,8 3,-2 Z" />
+              <!-- Torso, draped cloth, and legs -->
+              <path d="M5,4 C11,5 15,10 13,20 C11,35 16,45 16,55 L9,55 C7,45 4,35 6,25 L-1,55 L-7,55 C-1,40 -1,25 1,10 C-2,8 -3,5 5,4 Z" />
+              <!-- Arms walking -->
+              <path d="M3,10 Q-8,15 -10,25 Q-8,30 -5,25" />
+              <path d="M12,12 Q15,20 12,25 Q10,28 8,25" />
+            </g>
           </g>
         </svg>
       </div>
@@ -576,38 +715,68 @@
     </div>
     <div class="divine-glow-scene" id="divine-glow-7"></div>
     <div class="hanuman-figure" id="hanuman-fig">
-      <svg viewBox="0 0 200 300" class="hanuman-svg">
+      <svg viewBox="0 0 250 350" class="hanuman-svg">
         <defs>
           <radialGradient id="hanumanAura" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#f5b942" stop-opacity="0.4" />
+            <stop offset="0%" stop-color="#f5b942" stop-opacity="0.5" />
             <stop offset="100%" stop-color="#f5b942" stop-opacity="0" />
           </radialGradient>
         </defs>
-        <!-- Aura -->
-        <ellipse cx="100" cy="150" rx="90" ry="130" fill="url(#hanumanAura)" />
-        <!-- Hanuman body - orangutan-like divine form -->
-        <g fill="#c47a1e">
-          <!-- Head -->
-          <circle cx="100" cy="70" r="35" />
-          <!-- Face features -->
-          <ellipse cx="88" cy="68" rx="8" ry="10" fill="#8b5a0a" />
-          <ellipse cx="112" cy="68" rx="8" ry="10" fill="#8b5a0a" />
-          <!-- Eyes glow -->
-          <circle cx="88" cy="66" r="4" fill="#f5b942" />
-          <circle cx="112" cy="66" r="4" fill="#f5b942" />
-          <!-- Snout -->
-          <ellipse cx="100" cy="82" rx="12" ry="10" fill="#a0620f" />
-          <!-- Body -->
-          <rect x="70" y="105" width="60" height="90" rx="15" />
-          <!-- Arms -->
-          <rect x="30" y="110" width="40" height="15" rx="7" transform="rotate(20 50 117)" />
-          <rect x="130" y="110" width="40" height="15" rx="7" transform="rotate(-20 150 117)" />
-          <!-- Legs -->
-          <rect x="72" y="190" width="22" height="70" rx="8" />
-          <rect x="106" y="190" width="22" height="70" rx="8" />
-          <!-- Tail curling up -->
-          <path d="M160,200 Q200,150 180,100 Q165,70 180,50" stroke="#c47a1e" stroke-width="12" fill="none"
-            stroke-linecap="round" />
+        <!-- Divine Aura -->
+        <ellipse cx="125" cy="175" rx="110" ry="150" fill="url(#hanumanAura)" />
+        
+        <!-- Majestic Detailed Hanuman Kneeling -->
+        <g fill="#c47a1e" id="hanuman-detailed">
+          <!-- Torso & Chest (Muscular) -->
+          <path d="M100,100 C130,100 150,110 155,140 C160,170 145,190 120,200 L95,200 C75,190 70,140 100,100 Z" />
+          
+          <!-- Ornate Neck/Chest Armor Glow -->
+          <path d="M105,115 C120,115 130,125 130,140 L100,140 Z" fill="#f5b942" opacity="0.6" />
+
+          <!-- Head & Crown -->
+          <!-- Crown profile -->
+          <path d="M105,40 L115,20 L125,45 L135,25 L135,50 C125,60 100,55 105,40 Z" fill="#f5b942" />
+          <!-- Head profile (facing left towards where Rama arrives) -->
+          <path d="M100,50 C120,45 140,60 135,85 C130,105 110,105 105,95 C100,85 85,85 85,75 C85,65 95,50 100,50 Z" />
+          <!-- Distinctive Jaw/Snout -->
+          <path d="M85,75 C75,80 80,95 95,90 Z" />
+          <!-- Glowing Eye -->
+          <circle cx="102" cy="68" r="3" fill="#ffffff" />
+          <circle cx="102" cy="68" r="6" fill="#f5b942" opacity="0.5" filter="blur(1px)" />
+
+          <!-- Arms (Folding/Resting) -->
+          <!-- Right arm (holding mace) -->
+          <path d="M140,115 C160,130 155,160 140,180 L160,200 C165,180 180,140 140,115 Z" />
+          <!-- Left arm (in devotion) -->
+          <path d="M90,115 C70,130 80,160 90,170 C80,150 75,135 90,115 Z" />
+
+          <!-- Legs & Kneeling Posture -->
+          <!-- Right thigh (kneeling back) -->
+          <path d="M115,195 C140,200 160,230 155,270 L125,260 C130,220 110,205 115,195 Z" />
+          <!-- Right calf/foot -->
+          <path d="M155,265 C170,270 190,265 195,275 C180,285 150,280 155,265 Z" />
+          
+          <!-- Left leg (planted forward) -->
+          <path d="M95,195 C75,200 65,230 70,270 L95,260 C90,230 105,205 95,195 Z" />
+          <!-- Left foot -->
+          <path d="M70,270 C60,280 50,290 65,295 C80,295 85,280 70,270 Z" />
+
+          <!-- Majestic Tail curling over -->
+          <path d="M150,200 C190,180 220,130 190,70 C175,40 160,30 170,20" stroke="#c47a1e" stroke-width="8" fill="none" stroke-linecap="round" />
+          <!-- Tail glow/fluff -->
+          <circle cx="170" cy="20" r="10" fill="#f5b942" opacity="0.4" />
+        </g>
+
+        <!-- The Mighty Gada (Mace) -->
+        <g id="hanuman-gada" transform="translate(145, 175) rotate(15)">
+          <line x1="0" y1="-20" x2="0" y2="90" stroke="#ffd700" stroke-width="6" stroke-linecap="round" />
+          <!-- Mace Head -->
+          <ellipse cx="0" cy="95" rx="18" ry="25" fill="#f5b942" />
+          <ellipse cx="0" cy="95" rx="22" ry="15" fill="#c8960c" />
+          <!-- Spikes/Details -->
+          <polygon points="-25,95 -18,90 -18,100" fill="#fff8d0" />
+          <polygon points="25,95 18,90 18,100" fill="#fff8d0" />
+          <circle cx="0" cy="120" r="4" fill="#ffffff" />
         </g>
         <!-- Sacred thread -->
         <line x1="70" y1="110" x2="130" y2="110" stroke="#f5b942" stroke-width="2" opacity="0.8" />
@@ -673,6 +842,31 @@
         <!-- Lanka on far shore hint -->
         <polygon points="1350,500 1400,350 1440,480 1440,500" fill="#0d0620" opacity="0.8" />
         <polygon points="1370,500 1410,320 1440,450 1440,500" fill="#0f0825" opacity="0.7" />
+      </svg>
+    </div>
+    <!-- Growing Hanuman Background Majestic Silhouette -->
+    <div class="hanuman-grow-bg" id="hanuman-grow-bg" aria-hidden="true">
+      <svg viewBox="0 0 200 300" class="grow-svg">
+        <defs>
+          <radialGradient id="growMidAura" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#f5b942" stop-opacity="0.25" />
+            <stop offset="100%" stop-color="#f5b942" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <ellipse cx="100" cy="150" rx="90" ry="130" fill="url(#growMidAura)" />
+        <g fill="#c47a1e" opacity="0.2">
+          <!-- Mountain size figure -->
+          <circle cx="100" cy="70" r="35" />
+          <!-- Eyes glowing faintly -->
+          <circle cx="88" cy="66" r="3" fill="#f5b942" opacity="0.8" />
+          <circle cx="112" cy="66" r="3" fill="#f5b942" opacity="0.8" />
+          <rect x="70" y="105" width="60" height="90" rx="15" />
+          <!-- Arms stretched out to show magnitude -->
+          <rect x="10" y="110" width="60" height="20" rx="10" transform="rotate(-15 40 120)" />
+          <rect x="130" y="110" width="60" height="20" rx="10" transform="rotate(15 160 120)" />
+          <!-- Base / crossed legs -->
+          <ellipse cx="100" cy="200" rx="45" ry="25" />
+        </g>
       </svg>
     </div>
     <div class="hanuman-leap" id="hanuman-leap">
