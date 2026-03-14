@@ -425,6 +425,7 @@ dots.forEach((dot, i) => {
     start: 'top 40%',
     once: true,
     onEnter: () => {
+      // Bow snaps
       gsap.to('#shiva-bow', {
         scaleX: 1.5, scaleY: .5, opacity: 0,
         duration: .5, ease: 'power4.in',
@@ -432,6 +433,11 @@ dots.forEach((dot, i) => {
         onComplete: () => {
           gsap.from('#bow-glow', { scale: 3, opacity: 0, duration: 1, ease: 'power3.out' });
         }
+      });
+      // Arrow shoots out dynamically
+      gsap.to('#shiva-arrow', {
+        x: 800, y: -200, opacity: 0, scale: 2,
+        duration: 0.8, ease: 'power2.in',
       });
     }
   });
@@ -623,84 +629,116 @@ dots.forEach((dot, i) => {
     ctx.fillStyle = deerGlow;
     ctx.fillRect(-80, -80, 160, 160);
 
+    // Scale up the entire deer
+    ctx.scale(1.8, 1.8);
+
     // Body gradient
     const bodyGrad = ctx.createLinearGradient(-40, -30, 40, 30);
     bodyGrad.addColorStop(0, `rgba(255,230,100,${glowPulse})`);
     bodyGrad.addColorStop(.5, `rgba(245,185,66,${glowPulse})`);
-    bodyGrad.addColorStop(1, `rgba(200,140,30,${glowPulse * .8})`);
+    bodyGrad.addColorStop(1, `rgba(200,130,20,${glowPulse * .8})`);
 
     ctx.shadowColor = '#f5b942';
-    ctx.shadowBlur = 25;
-
-    // Body
-    ctx.beginPath();
-    ctx.ellipse(0, 0, 40, 22, 0, 0, Math.PI * 2);
+    ctx.shadowBlur = 20;
     ctx.fillStyle = bodyGrad;
+
+    // Majestic slender body
+    ctx.beginPath();
+    ctx.moveTo(-35, -5); // Rump
+    ctx.bezierCurveTo(-30, -25, 10, -25, 30, -10); // Back
+    ctx.bezierCurveTo(45, -25, 50, -35, 55, -45); // Neck up
+    ctx.bezierCurveTo(58, -35, 52, -15, 35, 5); // Neck down
+    ctx.bezierCurveTo(15, 20, -10, 20, -35, 10); // Belly
+    ctx.closePath();
     ctx.fill();
 
     // Head
     ctx.beginPath();
-    ctx.ellipse(38, -18, 18, 13, -.3, 0, Math.PI * 2);
+    ctx.ellipse(58, -48, 12, 7, -0.4, 0, Math.PI * 2); 
     ctx.fill();
 
     // Snout
     ctx.beginPath();
-    ctx.ellipse(53, -15, 10, 7, .1, 0, Math.PI * 2);
+    ctx.moveTo(68, -52);
+    ctx.quadraticCurveTo(75, -53, 72, -45);
+    ctx.lineTo(60, -45);
     ctx.fill();
 
     // Eye
     ctx.beginPath();
-    ctx.arc(44, -22, 3, 0, Math.PI * 2);
-    ctx.fillStyle = '#fff9e0';
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(44, -22, 1.5, 0, Math.PI * 2);
+    ctx.arc(61, -50, 1.5, 0, Math.PI * 2);
     ctx.fillStyle = '#1a0a00';
     ctx.fill();
 
-    // Antlers
+    // Elegant Antlers
     ctx.strokeStyle = `rgba(255,215,0,${glowPulse})`;
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2;
     ctx.lineCap = 'round';
-    ctx.shadowBlur = 15;
+    ctx.shadowBlur = 10;
+    
+    // Antler 1
     ctx.beginPath();
-    ctx.moveTo(36, -28);
-    ctx.lineTo(28, -55);
-    ctx.lineTo(20, -45);
-    ctx.moveTo(28, -55);
-    ctx.lineTo(35, -62);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(44, -27);
-    ctx.lineTo(52, -54);
-    ctx.lineTo(60, -44);
-    ctx.moveTo(52, -54);
-    ctx.lineTo(58, -62);
+    ctx.moveTo(56, -53);
+    ctx.quadraticCurveTo(50, -70, 40, -80);
+    ctx.moveTo(52, -65);
+    ctx.quadraticCurveTo(55, -75, 50, -85);
+    ctx.moveTo(45, -75);
+    ctx.lineTo(35, -70);
     ctx.stroke();
 
-    // Legs (animated)
-    const legSwing = Math.sin(t * 5) * 12;
+    // Antler 2 (Background)
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = `rgba(200,150,0,${glowPulse * 0.8})`;
+    ctx.beginPath();
+    ctx.moveTo(60, -52);
+    ctx.quadraticCurveTo(58, -65, 48, -75);
+    ctx.moveTo(54, -62);
+    ctx.lineTo(60, -70);
+    ctx.stroke();
+
+    // Slender Legs (animated)
+    const legSwing = Math.sin(t * 6) * 15;
     ctx.fillStyle = bodyGrad;
-    ctx.shadowBlur = 10;
-    function drawLeg(x, y, swing) {
+    ctx.shadowBlur = 5;
+
+    function drawSlenderLeg(x, y, swing, isBackLeg) {
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(swing * Math.PI / 180);
+      
+      if (isBackLeg) {
+        ctx.fillStyle = `rgba(180,120,15,${glowPulse * 0.9})`; // Darker for depth
+      }
+
       ctx.beginPath();
-      ctx.roundRect(-4, 0, 8, 30, 4);
+      ctx.moveTo(-4, 0); // Thigh top
+      ctx.quadraticCurveTo(-6, 15, -2, 25); // Knee curve
+      ctx.lineTo(-3, 40); // Hoof
+      ctx.lineTo(1, 40);
+      ctx.lineTo(2, 25);
+      ctx.quadraticCurveTo(4, 15, 2, 0);
+      ctx.closePath();
       ctx.fill();
       ctx.restore();
     }
-    drawLeg(-20, 18, legSwing);
-    drawLeg(-5, 18, -legSwing);
-    drawLeg(10, 18, legSwing * 1.2);
-    drawLeg(25, 18, -legSwing * 1.2);
 
-    // Tail
+    // Hind legs
+    drawSlenderLeg(-25, 2, legSwing, true); // Back
+    drawSlenderLeg(-18, 5, -legSwing, false); // Front
+    
+    // Front legs
+    drawSlenderLeg(20, 0, legSwing * 1.2, true); // Back
+    drawSlenderLeg(28, 2, -legSwing * 1.2, false); // Front
+
+    // Elegant Tail
     ctx.beginPath();
-    ctx.ellipse(-42, -5, 10, 6, -.5, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,240,150,${glowPulse})`;
+    ctx.moveTo(-35, -5);
+    ctx.quadraticCurveTo(-45, -10, -42, 5);
+    ctx.fillStyle = `rgba(245,185,66,${glowPulse})`;
     ctx.fill();
+
+    // Revert scale 
+    ctx.scale(1/1.8, 1/1.8);
 
     ctx.restore();
 
@@ -959,13 +997,23 @@ dots.forEach((dot, i) => {
     .to('#s8-content .scene-body', { opacity: 1, y: 0, duration: 1, stagger: .25 }, '-=.4')
     .to('#s8-content .scene-characters', { opacity: 1, duration: .8 }, '-=.2');
 
-  // Hanuman leaping scale effect
+  // Hanuman leaping scale effect and Majestic Background growth
   ScrollTrigger.create({
     trigger: scene,
     start: 'top bottom', end: 'bottom top', scrub: 1,
     onUpdate: self => {
+      // Leap effect
       const scale = 1 + self.progress * 1.5;
       gsap.set('#hanuman-leap', { scale });
+
+      // Growing background effect: scale up from 0.3 to 2.5
+      const bgScale = 0.3 + self.progress * 2.2;
+      // Fade in smoothly and fade out at the very end
+      let bgOp = self.progress < 0.15 ? self.progress / 0.15 : (self.progress > 0.85 ? (1 - self.progress) / 0.15 : 1);
+      gsap.set('#hanuman-grow-bg', { 
+        scale: bgScale, 
+        opacity: bgOp * 0.85 // Make him glow intensely but not block content 
+      });
     }
   });
 })();
