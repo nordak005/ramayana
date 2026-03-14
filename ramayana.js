@@ -855,19 +855,41 @@ dots.forEach((dot, i) => {
   tl
     .add(() => { lightningActive = true; flashLightning(); })
     .from('#dark-clouds .cloud', { opacity: 0, scale: .5, duration: 1.5, stagger: .3 })
+    
+    // 1. Chariot swoops down towards Sita
     .to('#ravana-chariot', {
-      x: -(window.innerWidth + 400), y: -80,
-      duration: 5, ease: 'none',
-      right: 'auto', left: '-300px'
-    })
-    .from('#jatayu', { opacity: 0, x: -100, duration: 1 }, '-=3.5')
-    .to('#jatayu', { opacity: 0, y: 100, rotation: -45, duration: 1.5, ease: 'power2.in' }, '-=1.5')
-    .to('#s6-content .scene-title', { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, '-=1')
-    .to('#s6-content .scene-divider', { opacity: 1, width: 60, duration: .8 }, '-=.6')
-    .to('#s6-content .scene-body', { opacity: 1, y: 0, duration: 1, stagger: .25 }, '-=.4')
-    .to('#s6-content .scene-characters', { opacity: 1, duration: .8 }, '-=.2');
+      x: () => -(window.innerWidth * 0.45), y: 150,
+      duration: 2, ease: 'power2.out'
+    }, '0')
+    
+    // 2. Sita struggles and gets pulled into the chariot
+    .to('#sita-ground', { y: -80, scale: 0.2, opacity: 0, duration: 0.8, ease: 'back.in(1)' }, '1.2')
+    .to('#captured-sita', { opacity: 1, duration: 0.3 }, '1.8')
+    
+    // 3. Jatayu flies in forcefully
+    .fromTo('#jatayu', 
+      { opacity: 0, x: -300, y: -200, rotation: 15 },
+      { opacity: 1, x: 0, y: 0, rotation: 0, duration: 1, ease: 'power2.out' }, '1.5')
+      
+    // 4. Chariot speeds away violently
+    .to('#ravana-chariot', {
+      x: () => -(window.innerWidth + 500), y: -50,
+      duration: 2.5, ease: 'power2.in'
+    }, '2.5')
+    
+    // 5. Jatayu is struck and plummets
+    .to('#jatayu', { opacity: 0, y: 400, x: -150, rotation: -90, duration: 1.5, ease: 'power2.in' }, '2.5')
+    
+    // 6. Text reveals
+    .to('#s6-content .scene-title', { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, '3')
+    .to('#s6-content .scene-divider', { opacity: 1, width: 60, duration: .8 }, '3.4')
+    .to('#s6-content .scene-body', { opacity: 1, y: 0, duration: 1, stagger: .25 }, '3.6')
+    .to('#s6-content .scene-characters', { opacity: 1, duration: .8 }, '3.8');
 
-  gsap.set('#ravana-chariot', { x: 0 });
+  // Reset animations properly on reverse/leave
+  gsap.set('#ravana-chariot', { x: 0, y: 0 });
+  gsap.set('#sita-ground', { opacity: 1, scale: 1, y: 0 });
+  gsap.set('#captured-sita', { opacity: 0 });
 })();
 
 /* ═══════════════════════════════════════════════════════
@@ -1037,47 +1059,45 @@ dots.forEach((dot, i) => {
 
   class Particle {
     constructor(x) {
-      this.x = x + (Math.random() - .5) * 60;
-      this.y = canvas.height * .85;
-      this.vx = (Math.random() - .5) * 2;
-      this.vy = -(1.5 + Math.random() * 4);
+      this.x = x + (Math.random() - .5) * 120; // Wilder spread
+      this.y = canvas.height * .95; // Start slightly lower
+      this.vx = (Math.random() - .5) * 3;
+      this.vy = -(2 + Math.random() * 6); // Faster rise
       this.life = 1;
-      this.decay = .008 + Math.random() * .015;
-      this.size = 4 + Math.random() * 20;
-      this.type = Math.random() > .6 ? 'ember' : 'flame';
+      this.decay = .003 + Math.random() * .01; // Slower decay = higher flames
+      this.size = 15 + Math.random() * 45; // Much larger particles for texture blob
+      this.type = Math.random() > .7 ? 'ember' : 'flame';
     }
     update() {
-      this.x += this.vx + Math.sin(this.y * .02) * .5;
+      this.x += this.vx + Math.sin(this.y * .01) * 1.5;
       this.y += this.vy;
       this.vy *= .99;
       this.life -= this.decay;
-      this.size *= .992;
+      this.size *= .99; // Shrink slightly
     }
     draw(ctx) {
       if (this.type === 'flame') {
         const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
-        grad.addColorStop(0, `rgba(255,240,150,${this.life})`);
-        grad.addColorStop(.3, `rgba(255,120,20,${this.life * .8})`);
-        grad.addColorStop(.7, `rgba(200,30,10,${this.life * .4})`);
+        grad.addColorStop(0, `rgba(255, 230, 100, ${this.life})`);
+        grad.addColorStop(.2, `rgba(255, 120, 20, ${this.life * 0.9})`);
+        grad.addColorStop(.6, `rgba(200, 30, 10, ${this.life * 0.5})`);
         grad.addColorStop(1, 'transparent');
         ctx.fillStyle = grad;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
       } else {
-        ctx.fillStyle = `rgba(255,100,20,${this.life})`;
-        ctx.shadowColor = '#ff4500';
-        ctx.shadowBlur = 8;
+        ctx.fillStyle = `rgba(255, 180, 50, ${this.life})`;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size * .3, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.size * .15, 0, Math.PI * 2);
         ctx.fill();
-        ctx.shadowBlur = 0;
       }
     }
   }
 
-  // Fire sources along city
-  const fireSources = [100, 250, 400, 550, 700, 850, 1000, 1150, 1300];
+  // More clustered fire sources
+  const fireSources = [];
+  for (let i = 0; i < 15; i++) fireSources.push(i * 100);
 
   function drawFire() {
     const w = canvas.width, h = canvas.height;
@@ -1085,18 +1105,22 @@ dots.forEach((dot, i) => {
 
     if (!fireActive) { requestAnimationFrame(drawFire); return; }
 
+    ctx.globalCompositeOperation = 'lighter'; // This merges the alpha elegantly for fire
+
     // Dark red sky glow
-    const skyGlow = ctx.createRadialGradient(w / 2, h, 0, w / 2, h, w * .8);
-    skyGlow.addColorStop(0, 'rgba(150,20,5,.4)');
-    skyGlow.addColorStop(.5, 'rgba(80,10,2,.2)');
+    const skyGlow = ctx.createRadialGradient(w / 2, h, 0, w / 2, h, w);
+    skyGlow.addColorStop(0, 'rgba(180,20,5,.6)');
+    skyGlow.addColorStop(.5, 'rgba(80,10,2,.3)');
     skyGlow.addColorStop(1, 'transparent');
     ctx.fillStyle = skyGlow;
     ctx.fillRect(0, 0, w, h);
 
-    // Spawn particles
+    // Spawn more massive particles
     fireSources.forEach(srcX => {
       const scaledX = (srcX / 1440) * w;
-      for (let i = 0; i < 3; i++) particles.push(new Particle(scaledX));
+      if (Math.random() > 0.2) {
+        for (let i = 0; i < 4; i++) particles.push(new Particle(scaledX));
+      }
     });
 
     // Update and draw
@@ -1106,14 +1130,16 @@ dots.forEach((dot, i) => {
       if (particles[i].life <= 0) particles.splice(i, 1);
     }
 
+    ctx.globalCompositeOperation = 'source-over'; // Reset for background drawing
+
     // City glow at bottom
     const buildingGlow = ctx.createLinearGradient(0, h * .75, 0, h);
-    buildingGlow.addColorStop(0, 'rgba(255,80,10,.15)');
-    buildingGlow.addColorStop(1, 'rgba(150,20,0,.3)');
+    buildingGlow.addColorStop(0, 'rgba(255,100,20,.2)');
+    buildingGlow.addColorStop(1, 'rgba(200,30,0,.5)');
     ctx.fillStyle = buildingGlow;
     ctx.fillRect(0, h * .75, w, h * .25);
 
-    if (particles.length > 2000) particles.splice(0, 100); // Performance cap
+    if (particles.length > 2500) particles.splice(0, 50); // Performance cap
 
     requestAnimationFrame(drawFire);
   }
